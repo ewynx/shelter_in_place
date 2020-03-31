@@ -1,21 +1,25 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
+import 'package:shelter_in_place/pages/home.dart';
 import 'package:shelter_in_place/pages/overview_charts.dart';
 import 'package:shelter_in_place/pages/questions/note.dart';
 import 'package:shelter_in_place/pages/questions/social_distancing.dart';
+import 'package:shelter_in_place/pages/settings/notification_settings.dart';
+import 'package:shelter_in_place/pages/settings/user_settings.dart';
+import 'package:shelter_in_place/pages/summary/new_summary.dart';
 import 'package:shelter_in_place/services/days_service.dart';
+
 import 'auth.dart';
 import 'models/day_model.dart';
-import 'pages/my_overview_chart.dart';
 import 'pages/localization/localizations.dart';
 import 'pages/login.dart';
-import 'pages/summary.dart';
 import 'pages/questions/activities.dart';
 import 'pages/questions/feelings.dart';
 
 void main() => runApp(
-    ChangeNotifierProvider<AuthService>(
+      ChangeNotifierProvider<AuthService>(
           child: MyApp(), create: (context) => AuthService()),
     );
 
@@ -32,8 +36,8 @@ class MyApp extends StatelessWidget {
           )
         ],
         child: MaterialApp(
-            title: 'Flutter Shelter in Place Demo',
-            theme: ThemeData(primarySwatch: Colors.blue),
+            title: 'distINce',
+            theme: ThemeData(fontFamily: 'Gilroy'),
             localizationsDelegates: [
               AppLocalizations.delegate,
               GlobalMaterialLocalizations.delegate,
@@ -47,11 +51,13 @@ class MyApp extends StatelessWidget {
             ],
             home: FutureBuilder(
               future: Provider.of<AuthService>(context).getUser(),
-              builder: (context, AsyncSnapshot snapshot) {
+              builder: (context, AsyncSnapshot<FirebaseUser> snapshot) {
                 if (snapshot.connectionState == ConnectionState.done) {
-                  return snapshot.hasData ? LoginPage() : SocialDistancing();
+                  return snapshot.hasData ? SocialDistancing() : LoginPage();
                 } else {
+                  // show loading indicator
                   return Container(color: Colors.white);
+                  // return LoadingCircle();
                 }
               },
             ),
@@ -71,15 +77,23 @@ class MyApp extends StatelessWidget {
                 );
               } else if (routeSettings.name == 'summary') {
                 return MaterialPageRoute(
-                  builder: (context) => Summary(),
+                  builder: (context) => HomePage(),
                 );
               } else if (routeSettings.name == 'fourth-question') {
                 return MaterialPageRoute(
                   builder: (context) => NoteForDay(),
                 );
-              }else if (routeSettings.name == 'overview') {
+              } else if (routeSettings.name == 'login') {
                 return MaterialPageRoute(
-                  builder: (context) => MyOverviewChart(),
+                  builder: (context) => LoginPage(),
+                );
+              } else if (routeSettings.name == 'user-settings') {
+                return MaterialPageRoute(
+                  builder: (context) => UserSettings(),
+                );
+              } else if (routeSettings.name == 'notification-settings') {
+                return MaterialPageRoute(
+                  builder: (context) => NotificationSettings(),
                 );
               }
               return null;

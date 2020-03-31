@@ -1,16 +1,21 @@
+import 'dart:collection';
+
 import 'package:flutter/material.dart';
 
 import 'my_legend_item.dart';
 
 class SimpleLegenda extends StatelessWidget {
-  SimpleLegenda({@required this.items});
+  SimpleLegenda(
+      {@required this.items, @required this.height, @required this.colors});
 
   final List<String> items;
+  final double height;
+  final HashMap<String, Color> colors;
 
   @override
   Widget build(BuildContext context) {
     List<LegendElement> legendElements = items.map((String keyName) {
-      return LegendElement(keyName: keyName);
+      return LegendElement(keyName: keyName, fontsize: 9.0, colors: colors);
     }).toList();
 
     GridView grid = GridView.count(
@@ -24,7 +29,7 @@ class SimpleLegenda extends StatelessWidget {
         children: legendElements);
 
     return ConstrainedBox(
-      constraints: BoxConstraints.expand(height: 130.0),
+      constraints: BoxConstraints.expand(height: height),
       // adjust the height here
       child: grid,
     );

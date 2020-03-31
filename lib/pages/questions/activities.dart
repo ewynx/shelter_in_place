@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shelter_in_place/models/day_model.dart';
 import 'package:shelter_in_place/pages/localization/localizations.dart';
-import 'package:shelter_in_place/pages/questions/my_bottom_bar.dart';
+import 'package:shelter_in_place/pages/questions/question_bottom_bar.dart';
 import 'package:shelter_in_place/pages/questions/shared_const.dart';
+import 'package:shelter_in_place/pages/util/colors.dart';
+import 'package:shelter_in_place/pages/util/round_checkbox.dart';
 
 import 'my_continue_button.dart';
 
@@ -25,16 +27,20 @@ class _ActivitiesState extends State<Activities> {
     activitities
         .forEach((activity) => answers.putIfAbsent(activity, () => false));
 
-    List<Widget> temp = activitities.map((String keyName) {
-      return CheckboxListTile(
-          title: Text(AppLocalizations.of(context).translate(keyName)),
-          value: answers[keyName],
-          onChanged: (value) {
-            setState(() {
-              answers.update(keyName, (e) => value);
-            });
-          },
-          controlAffinity: ListTileControlAffinity.leading);
+    List<Widget> activitiesBoxes = activitities.map((String keyName) {
+      return Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: LabeledCheckbox(
+            label: AppLocalizations.of(context).translate(keyName),
+            
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            value: answers[keyName],
+            onChanged: (bool newValue) {
+              setState(() {
+                answers.update(keyName, (e) => newValue);
+              });
+            },
+          ));
     }).toList();
 
     CustomContinueButton continueButton = CustomContinueButton(
@@ -52,23 +58,37 @@ class _ActivitiesState extends State<Activities> {
         top: true,
         bottom: false,
         child: Scaffold(
-            bottomNavigationBar: CustomBottomBar(
+            bottomNavigationBar: QuestionBottomBar(
               continueButton: continueButton,
             ),
             body: Center(
               child: Column(children: <Widget>[
                 SizedBox(height: 20.0),
-                Center(
-                    child: Text(
-                        AppLocalizations.of(context)
-                            .translate('question activities'),
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 30.0,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                        ))),
-                new Flexible(child: Column(children: temp))
+                Padding(
+                    padding: const EdgeInsets.fromLTRB(50, 30, 50, 30),
+                    child: Column(
+                      children: <Widget>[
+                        Text(
+                            AppLocalizations.of(context)
+                                .translate('question activities'),
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 30.0,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                            )),
+                        SizedBox(height: 20.0),
+                        Text(
+                            AppLocalizations.of(context).translate('check all'),
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.w200,
+                              color: Colors.black,
+                            ))
+                      ],
+                    )),
+                Expanded(child: ListView(children: activitiesBoxes))
               ]),
             )));
   }

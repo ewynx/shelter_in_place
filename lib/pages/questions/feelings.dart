@@ -7,7 +7,7 @@ import 'package:shelter_in_place/pages/localization/localizations.dart';
 import 'package:shelter_in_place/pages/questions/shared_const.dart';
 import 'package:shelter_in_place/pages/util/round_checkbox.dart';
 
-import 'my_bottom_bar.dart';
+import 'question_bottom_bar.dart';
 import 'my_continue_button.dart';
 
 class Feelings extends StatefulWidget {
@@ -37,6 +37,7 @@ class _FeelingsState extends State<Feelings> {
           return GridTile(
               child: LabeledCheckbox(
             label: AppLocalizations.of(context).translate(keyName),
+            
             padding: const EdgeInsets.symmetric(horizontal: 10.0),
             value: answers[keyName],
             onChanged: (bool newValue) {
@@ -60,12 +61,12 @@ class _FeelingsState extends State<Feelings> {
         top: true,
         bottom: false,
         child: Scaffold(
-            bottomNavigationBar: CustomBottomBar(
+            bottomNavigationBar: QuestionBottomBar(
               continueButton: continueButton,
             ),
             body: Center(
               child: Padding(
-                  padding: EdgeInsets.fromLTRB(30, 50, 30, 0),
+                  padding: EdgeInsets.fromLTRB(30, 60, 30, 0),
                   child: Column(children: <Widget>[
                     Text(
                         AppLocalizations.of(context)
@@ -76,9 +77,16 @@ class _FeelingsState extends State<Feelings> {
                           fontWeight: FontWeight.bold,
                           color: Colors.black,
                         )),
+                    SizedBox(height: 20.0),
+                    Text(AppLocalizations.of(context).translate('check all'),
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 18.0,
+                          fontWeight: FontWeight.w200,
+                          color: Colors.black,
+                        )),
                     SizedBox(height: 40.0),
-                    new Flexible(              fit: FlexFit.tight,
-                        child: tiles)
+                    new Flexible(fit: FlexFit.tight, child: tiles)
                   ])),
             )));
   }

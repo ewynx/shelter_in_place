@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'colors.dart';
+
 class LabeledCheckbox extends StatelessWidget {
   const LabeledCheckbox({
     this.label,
@@ -23,26 +25,23 @@ class LabeledCheckbox extends StatelessWidget {
         padding: padding,
         child: Row(
           children: <Widget>[
-            Container(
-              decoration: new BoxDecoration(
-                border: new Border.all(color: Colors.black, width: 2.0),
-                shape: BoxShape.circle,
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(6.0),
-                child: value
-                    ? Icon(
-                  Icons.check,
-                  size: 20.0,
-                  color: Colors.black,
-                )
-                    : Icon(
-                  Icons.check,
-                  size: 20.0,
-                  color: Colors.transparent, // Can't figure out how to do it more beautifully
-                )
-              ),
-            ),
+            value
+                ? Container(
+                    height: 24,
+                    width: 24,
+                    decoration: new BoxDecoration(
+                      border: new Border.all(color: buttonBlue, width: 7.0),
+                      borderRadius: BorderRadius.circular(8),
+                      shape: BoxShape.rectangle,
+                    ))
+                : Container(
+                    height: 24,
+                    width: 24,
+                    decoration: new BoxDecoration(
+                      border: new Border.all(color: powderBlue, width: 2.0),
+                      borderRadius: BorderRadius.circular(8),
+                      shape: BoxShape.rectangle,
+                    )),
             SizedBox(width: 10.0),
             Expanded(child: Text(label))
           ],

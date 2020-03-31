@@ -16,6 +16,8 @@ final List<dynamic> dates = <dynamic>[
 ];
 
 class Summary extends StatefulWidget {
+//  final String userEmail;
+
   @override
   _SummaryState createState() => _SummaryState();
 }

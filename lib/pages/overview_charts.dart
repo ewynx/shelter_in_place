@@ -19,10 +19,10 @@ class _MyOverviewChartState extends State<MyOverviewChart> {
   @override
   Widget build(BuildContext context) {
     final dayModel = Provider.of<Day>(context);
-    List<String> shuffledFeelings = Constants().feelings;
+    List<String> shuffledFeelings = Constants.feelings;
     shuffledFeelings.shuffle(Random.secure());
 
-    List<String> shuffledActivities = Constants().activitities;
+    List<String> shuffledActivities = Constants.activitities;
     shuffledActivities.shuffle(Random.secure());
 
     return Container(

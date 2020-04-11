@@ -20,13 +20,6 @@ class _SocialDistancingState extends State<SocialDistancing> {
         top: true,
         bottom: false,
         child: Scaffold(
-          bottomNavigationBar: BottomAppBar(
-            child: new Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[],
-            ),
-          ),
           body: Center(
             child: Column(
               children: <Widget>[
@@ -73,7 +66,7 @@ SizedBox yesButton(BuildContext context, String keyname, Day dayModel) {
             )),
         onPressed: () {
           dayModel.socialDistance = false;
-          Navigator.pushNamed(context, 'second-question');
+          Navigator.pushNamed(context, 'other-questions');
         },
       ));
 }
@@ -94,7 +87,7 @@ SizedBox noButton(BuildContext context, String keyname, Day dayModel) {
             )),
         onPressed: () {
           dayModel.socialDistance = false;
-          Navigator.pushNamed(context, 'second-question');
+          Navigator.pushNamed(context, 'other-questions');
         },
       ));
 }

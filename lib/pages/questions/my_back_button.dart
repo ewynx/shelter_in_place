@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:shelter_in_place/pages/localization/localizations.dart';
-import 'package:shelter_in_place/pages/util/colors.dart';
 
 class CustomBackButton extends StatelessWidget {
+  CustomBackButton({@required this.onPressed});
+
+  final GestureTapCallback onPressed;
+
   @override
   Widget build(BuildContext context) {
     return FlatButton(
@@ -16,7 +19,7 @@ class CustomBackButton extends StatelessWidget {
             fontWeight: FontWeight.bold,
           )),
       onPressed: () {
-        Navigator.pop(context);
+        this.onPressed();
       },
     );
   }

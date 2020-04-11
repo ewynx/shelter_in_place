@@ -1,14 +1,9 @@
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:shelter_in_place/models/day_model.dart';
 import 'package:shelter_in_place/pages/localization/localizations.dart';
 import 'package:shelter_in_place/pages/questions/shared_const.dart';
 import 'package:shelter_in_place/pages/util/round_checkbox.dart';
-
-import 'question_bottom_bar.dart';
-import 'my_continue_button.dart';
 
 class Feelings extends StatefulWidget {
   @override
@@ -20,9 +15,7 @@ class _FeelingsState extends State<Feelings> {
 
   @override
   Widget build(BuildContext context) {
-    final dayModel = Provider.of<Day>(context);
-
-    List<String> feelings = Constants().feelings;
+    List<String> feelings = Constants.feelings;
     feelings.forEach((feeling) => answers.putIfAbsent(feeling, () => false));
 
     GridView tiles = GridView.count(
@@ -37,7 +30,6 @@ class _FeelingsState extends State<Feelings> {
           return GridTile(
               child: LabeledCheckbox(
             label: AppLocalizations.of(context).translate(keyName),
-            
             padding: const EdgeInsets.symmetric(horizontal: 10.0),
             value: answers[keyName],
             onChanged: (bool newValue) {
@@ -48,46 +40,28 @@ class _FeelingsState extends State<Feelings> {
           ));
         }).toList());
 
-    CustomContinueButton continueButton = CustomContinueButton(
-      onPressed: () {
-        HashMap chosenActivities = answers;
-        chosenActivities.removeWhere((k, v) => !v);
-        dayModel.feelings = chosenActivities.keys.toList();
-        Navigator.pushNamed(context, 'fourth-question');
-      },
+    return Center(
+      child: Padding(
+          padding: EdgeInsets.fromLTRB(30, 60, 30, 0),
+          child: Column(children: <Widget>[
+            Text(AppLocalizations.of(context).translate('question feelings'),
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 30.0,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                )),
+            SizedBox(height: 20.0),
+            Text(AppLocalizations.of(context).translate('check all'),
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 18.0,
+                  fontWeight: FontWeight.w200,
+                  color: Colors.black,
+                )),
+            SizedBox(height: 40.0),
+            new Flexible(fit: FlexFit.tight, child: tiles)
+          ])),
     );
-
-    return SafeArea(
-        top: true,
-        bottom: false,
-        child: Scaffold(
-            bottomNavigationBar: QuestionBottomBar(
-              continueButton: continueButton,
-            ),
-            body: Center(
-              child: Padding(
-                  padding: EdgeInsets.fromLTRB(30, 60, 30, 0),
-                  child: Column(children: <Widget>[
-                    Text(
-                        AppLocalizations.of(context)
-                            .translate('question feelings'),
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 30.0,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                        )),
-                    SizedBox(height: 20.0),
-                    Text(AppLocalizations.of(context).translate('check all'),
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 18.0,
-                          fontWeight: FontWeight.w200,
-                          color: Colors.black,
-                        )),
-                    SizedBox(height: 40.0),
-                    new Flexible(fit: FlexFit.tight, child: tiles)
-                  ])),
-            )));
   }
 }

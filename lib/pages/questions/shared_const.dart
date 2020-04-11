@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:shelter_in_place/pages/util/colors.dart';
 
 class Constants {
-  final List<String> feelings = [
+  static final List<String> feelings = [
     "Happy",
     "Angry",
     "Depressed",
@@ -36,7 +36,7 @@ class Constants {
     return colorsFeelings;
   }
 
-  final List<String> activitities = [
+  static final List<String> activitities = [
     "tv",
     "read",
     "cook",
@@ -50,19 +50,33 @@ class Constants {
     "other"
   ];
 
+  HashMap<String, String> shortActivities() {
+    HashMap shortActivities = new HashMap<String, String>();
+    activitities.forEach((act) {
+      shortActivities.putIfAbsent(act, () => act + '-short');
+    });
+
+    return shortActivities;
+  }
+
+  void addEntries(String keyname, Color color, HashMap<String, Color> map) {
+    map.putIfAbsent(keyname, () => color);
+    map.putIfAbsent(shortActivities()[keyname], () => color);
+  }
+
   HashMap<String, Color> colorsActivitities() {
     HashMap colorsActivitities = new HashMap<String, Color>();
-    colorsActivitities.putIfAbsent(activitities[0], () => purple);
-    colorsActivitities.putIfAbsent(activitities[1], () => cyan);
-    colorsActivitities.putIfAbsent(activitities[2], () => indigo);
-    colorsActivitities.putIfAbsent(activitities[3], () => pink);
-    colorsActivitities.putIfAbsent(activitities[4], () => yellow);
-    colorsActivitities.putIfAbsent(activitities[5], () => orange);
-    colorsActivitities.putIfAbsent(activitities[6], () => teal);
-    colorsActivitities.putIfAbsent(activitities[7], () => blue);
-    colorsActivitities.putIfAbsent(activitities[8], () => red);
-    colorsActivitities.putIfAbsent(activitities[9], () => yellow2);
-    colorsActivitities.putIfAbsent(activitities[10], () => green);
+    addEntries(activitities[0], purple, colorsActivitities);
+    addEntries(activitities[1], cyan, colorsActivitities);
+    addEntries(activitities[2], indigo, colorsActivitities);
+    addEntries(activitities[3], pink, colorsActivitities);
+    addEntries(activitities[4], yellow, colorsActivitities);
+    addEntries(activitities[5], orange, colorsActivitities);
+    addEntries(activitities[6], teal, colorsActivitities);
+    addEntries(activitities[7], blue, colorsActivitities);
+    addEntries(activitities[8], red, colorsActivitities);
+    addEntries(activitities[9], yellow2, colorsActivitities);
+    addEntries(activitities[10], green, colorsActivitities);
     return colorsActivitities;
   }
 }

@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:shelter_in_place/pages/home.dart';
 import 'package:shelter_in_place/pages/overview_charts.dart';
 import 'package:shelter_in_place/pages/questions/note.dart';
+import 'package:shelter_in_place/pages/questions/questions_controller.dart';
 import 'package:shelter_in_place/pages/questions/social_distancing.dart';
 import 'package:shelter_in_place/pages/settings/notification_settings.dart';
 import 'package:shelter_in_place/pages/settings/user_settings.dart';
@@ -67,21 +68,13 @@ class MyApp extends StatelessWidget {
                 return MaterialPageRoute(
                   builder: (context) => SocialDistancing(),
                 );
-              } else if (routeSettings.name == 'second-question') {
+              } else if (routeSettings.name == 'other-questions') {
                 return MaterialPageRoute(
-                  builder: (context) => Activities(),
-                );
-              } else if (routeSettings.name == 'third-question') {
-                return MaterialPageRoute(
-                  builder: (context) => Feelings(),
+                  builder: (context) => QuestionsController(),
                 );
               } else if (routeSettings.name == 'summary') {
                 return MaterialPageRoute(
                   builder: (context) => HomePage(),
-                );
-              } else if (routeSettings.name == 'fourth-question') {
-                return MaterialPageRoute(
-                  builder: (context) => NoteForDay(),
                 );
               } else if (routeSettings.name == 'login') {
                 return MaterialPageRoute(

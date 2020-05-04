@@ -65,7 +65,7 @@ SizedBox yesButton(BuildContext context, String keyname, Day dayModel) {
               fontWeight: FontWeight.bold,
             )),
         onPressed: () {
-          dayModel.socialDistance = false;
+          dayModel.socialDistance = true;
           Navigator.pushNamed(context, 'other-questions');
         },
       ));

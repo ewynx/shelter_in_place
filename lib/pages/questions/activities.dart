@@ -15,11 +15,11 @@ class _ActivitiesState extends State<Activities> {
 
   @override
   Widget build(BuildContext context) {
-    List<String> activitities = Constants.activitities;
-    activitities
+    List<String> activities = Constants.activities;
+    activities
         .forEach((activity) => answers.putIfAbsent(activity, () => false));
 
-    List<Widget> activitiesBoxes = activitities.map((String keyName) {
+    List<Widget> activitiesBoxes = activities.map((String keyName) {
       return Padding(
           padding: const EdgeInsets.all(15.0),
           child: LabeledCheckbox(

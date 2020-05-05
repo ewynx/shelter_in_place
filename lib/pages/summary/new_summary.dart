@@ -27,7 +27,7 @@ class NewSummary extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<String> feels = Constants.feelings;
-    List<String> acts = Constants.activitities;
+    List<String> acts = Constants.activities;
 
     void shuffle() {
       feels.shuffle(Random.secure());

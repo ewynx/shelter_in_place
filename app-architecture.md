@@ -9,6 +9,8 @@ The purpose of this documentation is to help developers better understand the ar
 - [social_distancing.dart](#social_distancing.dart)
 - [questions_controller.dart](#questions_controller.dart)
 - [activities.dart](#activities.dart)
+- [feelings.dart](#feelings.dart)
+- [note.dart](#note.dart)
 
 ### main.dart
 This defines the main app widget and defines all the routes for the app.
@@ -20,4 +22,10 @@ The initial question page of the app, asking if the user practiced social distan
 This page will display each of the questions as the user clicks the `Next` button at the bottom on the screen. Each of the pages for the questions are imported as packages at the top of the page (activities.dart, feelings.dart, note.dart). These three packages are referenced when their corresponding are initialized as the `children` of the Scaffold body.
 
 ### activities.dart
-This widget asks the user which activities they completed by displaying checkboxes for each activity.
+This widget asks the user which activities they completed by displaying checkboxes for each activity. For each activity a user selects, the values in the `answers` hash map corresponding to each of those activities will be set to `true`. The `Constants.activities` list is set in the `shared_const.dart` file.
+
+### feelings.dart
+This widget asks the user for the various feelings they experienced throughout the day. Like `activities.dart`, each feeling is displayed as a checkbox. Selecting a feeling will also populate the `answers` hash map, setting the value for that feeling to `true`. The `Constants.feelings` list is set in the `shared_const.dart` file.
+
+### note.dart
+This page asks the user to input a note about the day. The string value of the note will be set to the `dayModel.note` hash map index. After clicking the `Next` button on this screen, the app will navigate to the summary page.

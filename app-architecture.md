@@ -11,6 +11,7 @@ The purpose of this documentation is to help developers better understand the ar
 - [activities.dart](#activities.dart)
 - [feelings.dart](#feelings.dart)
 - [note.dart](#note.dart)
+- [new_summary.dart](#new_summary.dart)
 
 ### main.dart
 This defines the main app widget and defines all the routes for the app.
@@ -28,4 +29,7 @@ This widget asks the user which activities they completed by displaying checkbox
 This widget asks the user for the various feelings they experienced throughout the day. Like `activities.dart`, each feeling is displayed as a checkbox. Selecting a feeling will also populate the `answers` hash map, setting the value for that feeling to `true`. The `Constants.feelings` list is set in the `shared_const.dart` file.
 
 ### note.dart
-This page asks the user to input a note about the day. The string value of the note will be set to the `dayModel.note` hash map index. After clicking the `Next` button on this screen, the app will navigate to the summary page.
+This page asks the user to input a note about the day. The string value of the note will be set to the `dayModel.note` hash map index. After clicking the `Next` button on this screen, the app will navigate to the summary page, `new_summary.dart`.
+
+### new_summary.dart
+This page displays a list of widgets for each day explicitly defined in this file, starting with an entry with today's date. Each widget contains summary information defined in `single_day_summary.dart`, which includes a list of activities and feelings and a note from that day. Each day is assigned a certain smiley face based on the aggregate score of feelings for that day. The scores for each feeling are defined in `mood_const.dart`.

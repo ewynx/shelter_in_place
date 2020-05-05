@@ -35,6 +35,8 @@ class _QuestionsControllerState extends State<QuestionsController> {
   Widget build(BuildContext context) {
     final dayModel = Provider.of<Day>(context);
     final dayService = Provider.of<DaysService>(context);
+    dayModel.activities = [];
+    dayModel.feelings = [];
 
     CustomContinueButton continueButton = CustomContinueButton(
       onPressed: () async {

@@ -1,9 +1,11 @@
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shelter_in_place/pages/localization/localizations.dart';
 import 'package:shelter_in_place/pages/questions/shared_const.dart';
 import 'package:shelter_in_place/pages/util/round_checkbox.dart';
+import 'package:shelter_in_place/models/day_model.dart';
 
 class Activities extends StatefulWidget {
   @override
@@ -15,6 +17,7 @@ class _ActivitiesState extends State<Activities> {
 
   @override
   Widget build(BuildContext context) {
+    final dayModel = Provider.of<Day>(context);
     List<String> activities = Constants.activities;
     activities
         .forEach((activity) => answers.putIfAbsent(activity, () => false));
@@ -29,6 +32,7 @@ class _ActivitiesState extends State<Activities> {
             onChanged: (bool newValue) {
               setState(() {
                 answers.update(keyName, (e) => newValue);
+                dayModel.activities.add(keyName);
               });
             },
           ));

@@ -18,9 +18,9 @@ class _ActivitiesState extends State<Activities> {
   @override
   Widget build(BuildContext context) {
     final day = Provider.of<Day>(context);
-    List<String> activitiesFromModel = day.getActivities();
+    List<String> activitiesFromDay = day.getActivities();
     List<String> activities = Constants.activities;
-    activitiesFromModel.forEach((activity) =>
+    activitiesFromDay.forEach((activity) =>
       answers[activity] = true
     );
     activities.forEach((activity) => answers.putIfAbsent(activity, () => false));

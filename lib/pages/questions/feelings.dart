@@ -1,9 +1,11 @@
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shelter_in_place/pages/localization/localizations.dart';
 import 'package:shelter_in_place/pages/questions/shared_const.dart';
 import 'package:shelter_in_place/pages/util/round_checkbox.dart';
+import 'package:shelter_in_place/models/day_model.dart';
 
 class Feelings extends StatefulWidget {
   @override
@@ -15,7 +17,10 @@ class _FeelingsState extends State<Feelings> {
 
   @override
   Widget build(BuildContext context) {
+    final day = Provider.of<Day>(context);
     List<String> feelings = Constants.feelings;
+    List<String> feelingsFromDay = day.getFeelings();
+    feelingsFromDay.forEach((feeling) => answers[feeling] = true);
     feelings.forEach((feeling) => answers.putIfAbsent(feeling, () => false));
 
     GridView tiles = GridView.count(
@@ -35,6 +40,11 @@ class _FeelingsState extends State<Feelings> {
             onChanged: (bool newValue) {
               setState(() {
                 answers.update(keyName, (e) => newValue);
+                if (day.feelings.contains(keyName)) {
+                  day.feelings.remove(keyName);
+                } else {
+                  day.feelings.add(keyName);
+                }
               });
             },
           ));

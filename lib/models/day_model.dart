@@ -1,9 +1,11 @@
+import 'dart:collection';
+
 class Day {
   String id;
   DateTime date;
   bool socialDistance;
-  List<String> feelings;
-  List<String> activities;
+  Set<String> feelings;
+  Set<String> activities;
   String note;
 
   Day({this.id, this.date, this.socialDistance, this.feelings,this.activities,this.note});
@@ -13,8 +15,16 @@ class Day {
         date = snapshot['date'] ?? '', //TODO check how to put it in the correct timezone
         socialDistance = snapshot['socialDistance'] ?? '',
         feelings = snapshot['feelings'] ?? [''],
-        activities = snapshot['activities'] ?? [''],
+        activities = snapshot['activities'] ?? new HashSet(),
         note = snapshot['note'] ?? '';
+
+  List<String> getActivities() {
+    return this.activities.toList();
+  }
+
+  List<String> getFeelings() {
+    return this.feelings.toList();
+  }
 
   toJson() {
     return {

@@ -1,9 +1,11 @@
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shelter_in_place/pages/localization/localizations.dart';
 import 'package:shelter_in_place/pages/questions/shared_const.dart';
 import 'package:shelter_in_place/pages/util/round_checkbox.dart';
+import 'package:shelter_in_place/models/day_model.dart';
 
 class Activities extends StatefulWidget {
   @override
@@ -15,11 +17,15 @@ class _ActivitiesState extends State<Activities> {
 
   @override
   Widget build(BuildContext context) {
-    List<String> activitities = Constants.activitities;
-    activitities
-        .forEach((activity) => answers.putIfAbsent(activity, () => false));
+    final day = Provider.of<Day>(context);
+    List<String> activitiesFromDay = day.getActivities();
+    List<String> activities = Constants.activities;
+    activitiesFromDay.forEach((activity) =>
+      answers[activity] = true
+    );
+    activities.forEach((activity) => answers.putIfAbsent(activity, () => false));
 
-    List<Widget> activitiesBoxes = activitities.map((String keyName) {
+    List<Widget> activitiesBoxes = activities.map((String keyName) {
       return Padding(
           padding: const EdgeInsets.all(15.0),
           child: LabeledCheckbox(
@@ -29,6 +35,11 @@ class _ActivitiesState extends State<Activities> {
             onChanged: (bool newValue) {
               setState(() {
                 answers.update(keyName, (e) => newValue);
+                if (day.activities.contains(keyName)) {
+                  day.activities.remove(keyName);
+                } else {
+                  day.activities.add(keyName);
+                }
               });
             },
           ));

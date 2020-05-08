@@ -36,7 +36,7 @@ class Constants {
     return colorsFeelings;
   }
 
-  static final List<String> activitities = [
+  static final List<String> activities = [
     "tv",
     "read",
     "cook",
@@ -52,7 +52,7 @@ class Constants {
 
   HashMap<String, String> shortActivities() {
     HashMap shortActivities = new HashMap<String, String>();
-    activitities.forEach((act) {
+    activities.forEach((act) {
       shortActivities.putIfAbsent(act, () => act + '-short');
     });
 
@@ -66,17 +66,17 @@ class Constants {
 
   HashMap<String, Color> colorsActivitities() {
     HashMap colorsActivitities = new HashMap<String, Color>();
-    addEntries(activitities[0], purple, colorsActivitities);
-    addEntries(activitities[1], cyan, colorsActivitities);
-    addEntries(activitities[2], indigo, colorsActivitities);
-    addEntries(activitities[3], pink, colorsActivitities);
-    addEntries(activitities[4], yellow, colorsActivitities);
-    addEntries(activitities[5], orange, colorsActivitities);
-    addEntries(activitities[6], teal, colorsActivitities);
-    addEntries(activitities[7], blue, colorsActivitities);
-    addEntries(activitities[8], red, colorsActivitities);
-    addEntries(activitities[9], yellow2, colorsActivitities);
-    addEntries(activitities[10], green, colorsActivitities);
+    addEntries(activities[0], purple, colorsActivitities);
+    addEntries(activities[1], cyan, colorsActivitities);
+    addEntries(activities[2], indigo, colorsActivitities);
+    addEntries(activities[3], pink, colorsActivitities);
+    addEntries(activities[4], yellow, colorsActivitities);
+    addEntries(activities[5], orange, colorsActivitities);
+    addEntries(activities[6], teal, colorsActivitities);
+    addEntries(activities[7], blue, colorsActivitities);
+    addEntries(activities[8], red, colorsActivitities);
+    addEntries(activities[9], yellow2, colorsActivitities);
+    addEntries(activities[10], green, colorsActivitities);
     return colorsActivitities;
   }
 }

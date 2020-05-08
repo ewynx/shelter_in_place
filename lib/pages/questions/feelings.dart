@@ -17,8 +17,10 @@ class _FeelingsState extends State<Feelings> {
 
   @override
   Widget build(BuildContext context) {
-    final dayModel = Provider.of<Day>(context);
+    final day = Provider.of<Day>(context);
     List<String> feelings = Constants.feelings;
+    List<String> feelingsFromDay = day.getFeelings();
+    feelingsFromDay.forEach((feeling) => answers[feeling] = true);
     feelings.forEach((feeling) => answers.putIfAbsent(feeling, () => false));
 
     GridView tiles = GridView.count(
@@ -38,7 +40,11 @@ class _FeelingsState extends State<Feelings> {
             onChanged: (bool newValue) {
               setState(() {
                 answers.update(keyName, (e) => newValue);
-                dayModel.feelings.add(keyName);
+                if (day.feelings.contains(keyName)) {
+                  day.feelings.remove(keyName);
+                } else {
+                  day.feelings.add(keyName);
+                }
               });
             },
           ));

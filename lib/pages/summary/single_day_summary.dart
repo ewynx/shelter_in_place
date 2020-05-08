@@ -23,7 +23,7 @@ class SingleDaySummary extends StatelessWidget {
       );
     }).toList();
 
-    List<LegendElement> mood = day.feelings.map((String keyName) {
+    List<LegendElement> mood = day.getFeelings().map((String keyName) {
       return LegendElement(
           keyName: keyName,
           fontsize: 9.0,

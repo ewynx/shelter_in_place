@@ -4,7 +4,7 @@ class Day {
   String id;
   DateTime date;
   bool socialDistance;
-  List<String> feelings;
+  Set<String> feelings;
   Set<String> activities;
   String note;
 
@@ -20,6 +20,10 @@ class Day {
 
   List<String> getActivities() {
     return this.activities.toList();
+  }
+
+  List<String> getFeelings() {
+    return this.feelings.toList();
   }
 
   toJson() {

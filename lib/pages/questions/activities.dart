@@ -17,10 +17,13 @@ class _ActivitiesState extends State<Activities> {
 
   @override
   Widget build(BuildContext context) {
-    final dayModel = Provider.of<Day>(context);
+    final day = Provider.of<Day>(context);
+    List<String> activitiesFromModel = day.getActivities();
     List<String> activities = Constants.activities;
-    activities
-        .forEach((activity) => answers.putIfAbsent(activity, () => false));
+    activitiesFromModel.forEach((activity) =>
+      answers[activity] = true
+    );
+    activities.forEach((activity) => answers.putIfAbsent(activity, () => false));
 
     List<Widget> activitiesBoxes = activities.map((String keyName) {
       return Padding(
@@ -32,7 +35,11 @@ class _ActivitiesState extends State<Activities> {
             onChanged: (bool newValue) {
               setState(() {
                 answers.update(keyName, (e) => newValue);
-                dayModel.activities.add(keyName);
+                if (day.activities.contains(keyName)) {
+                  day.activities.remove(keyName);
+                } else {
+                  day.activities.add(keyName);
+                }
               });
             },
           ));

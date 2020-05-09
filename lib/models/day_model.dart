@@ -14,7 +14,7 @@ class Day {
         id = id ?? '',
         date = snapshot['date'] ?? '', //TODO check how to put it in the correct timezone
         socialDistance = snapshot['socialDistance'] ?? '',
-        feelings = snapshot['feelings'] ?? [''],
+        feelings = snapshot['feelings'] ?? new HashSet(),
         activities = snapshot['activities'] ?? new HashSet(),
         note = snapshot['note'] ?? '';
 

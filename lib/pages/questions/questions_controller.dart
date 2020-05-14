@@ -33,17 +33,19 @@ class _QuestionsControllerState extends State<QuestionsController> {
 
   @override
   Widget build(BuildContext context) {
-    final dayModel = Provider.of<Day>(context);
+    final day = Provider.of<Day>(context);
     final dayService = Provider.of<DaysService>(context);
+    day.activities = new Set();
+    day.feelings = new Set();
 
     CustomContinueButton continueButton = CustomContinueButton(
       onPressed: () async {
-        dayModel.date = DateTime.now();
-        print(dayModel.date);
-        print(dayModel.date.toUtc());
-        print(dayModel.date.toLocal());
-        print(dayModel.date.toUtc().toLocal());
-        await dayService.addDocument(dayModel.toJson());
+        day.date = DateTime.now();
+        print(day.date);
+        print(day.date.toUtc());
+        print(day.date.toLocal());
+        print(day.date.toUtc().toLocal());
+        await dayService.addDocument(day.toJson());
         double _pageIndex = _pageController.page.roundToDouble();
         if (_pageController.hasClients && _pageIndex < 2) {
           _pageController.nextPage(

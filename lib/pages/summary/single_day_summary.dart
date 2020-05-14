@@ -14,7 +14,7 @@ class SingleDaySummary extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<LegendElement> activities = day.activities.map((String keyName) {
+    List<LegendElement> activities = day.getActivities().map((String keyName) {
       return LegendElement(
         keyName: Constants().shortActivities()[keyName],
         // Display a shorter activity name
@@ -23,7 +23,7 @@ class SingleDaySummary extends StatelessWidget {
       );
     }).toList();
 
-    List<LegendElement> mood = day.feelings.map((String keyName) {
+    List<LegendElement> mood = day.getFeelings().map((String keyName) {
       return LegendElement(
           keyName: keyName,
           fontsize: 9.0,

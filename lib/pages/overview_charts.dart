@@ -22,7 +22,7 @@ class _MyOverviewChartState extends State<MyOverviewChart> {
     List<String> shuffledFeelings = Constants.feelings;
     shuffledFeelings.shuffle(Random.secure());
 
-    List<String> shuffledActivities = Constants.activitities;
+    List<String> shuffledActivities = Constants.activities;
     shuffledActivities.shuffle(Random.secure());
 
     return Container(

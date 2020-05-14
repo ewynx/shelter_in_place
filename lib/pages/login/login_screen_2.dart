@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import '../auth.dart';
-import 'localization/localizations.dart';
+import '../../auth.dart';
+import '../localization/localizations.dart';
 import 'package:shelter_in_place/pages/util/colors.dart';
 
-class LoginPage extends StatefulWidget {
+class LoginSecondPage extends StatefulWidget {
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _LoginSecondPageState createState() => _LoginSecondPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginSecondPageState extends State<LoginSecondPage> {
   // Form with validation
   final _formKey = GlobalKey<FormState>();
   String _password;
@@ -22,13 +22,11 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Container(
-                      decoration: new BoxDecoration(color: darkBlueButton),
+                      decoration: new BoxDecoration(color: darkSlateBlue),
             child: Column(
               
       children: <Widget>[
-         SizedBox(height: 150.0),
-                Image(image: AssetImage('logo2.png'), width: 150,),
-                SizedBox(height: 20.0),
+         SizedBox(height: 50.0),
                 Image(image: AssetImage('wordmark3.png'), width: 200,),
         Container(
             padding: EdgeInsets.all(20.0),

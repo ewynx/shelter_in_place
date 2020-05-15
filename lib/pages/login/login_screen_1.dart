@@ -53,7 +53,7 @@ class _LoginFirstPageState extends State<LoginFirstPage> {
                       Row(
                         children: <Widget>[
                           TransparantButton(
-                            titleKeyName: 'Sign up',
+                            titleKeyName: 'Create account',
                             onPressed: () {
                               Navigator.pushNamed(context, 'signup');
                             },

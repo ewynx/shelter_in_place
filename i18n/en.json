@@ -2,7 +2,7 @@
   "welcome": "Welcome",
   "title": "Hello!",
   "enter email": "Please enter your email",
-  "email address": "Email Address",
+  "email address": "Email address",
   "enter password": "Please enter your password",
   "password": "Password",
   "login button text": "Log In",
@@ -67,6 +67,9 @@
   "User settings": "User settings",
   "Notification settings": "Notification settings",
   "Logout": "Log out",
-  "Sign up": "Create account",
-  "go back": "Go back"
+  "Create account": "Create account",
+  "go back": "Go back",
+  "Sign up": "Sign up",
+  "enter name": "Please enter your name",
+  "name": "Name"
 }

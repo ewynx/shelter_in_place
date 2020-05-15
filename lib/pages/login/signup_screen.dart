@@ -55,16 +55,8 @@ class _SignupPageState extends State<SignupPage> {
                                 }
                                 return null;
                               },
-                              decoration: InputDecoration(
-                                  filled: true,
-                                  fillColor: Colors.white,
-                                  border: new OutlineInputBorder(
-                                    borderRadius: const BorderRadius.all(
-                                      const Radius.circular(10.0),
-                                    ),
-                                  ),
-                                  hintText: AppLocalizations.of(context)
-                                      .translate('name'))),
+                              decoration:
+                                  WhiteInputDecoration(context, 'name')),
                           SizedBox(height: 20.0),
                           TextFormField(
                               cursorColor: darkSlateBlue,
@@ -81,16 +73,8 @@ class _SignupPageState extends State<SignupPage> {
                                 }
                                 return null;
                               },
-                              decoration: InputDecoration(
-                                  filled: true,
-                                  fillColor: Colors.white,
-                                  border: new OutlineInputBorder(
-                                    borderRadius: const BorderRadius.all(
-                                      const Radius.circular(10.0),
-                                    ),
-                                  ),
-                                  hintText: AppLocalizations.of(context)
-                                      .translate('email address'))),
+                              decoration: WhiteInputDecoration(
+                                  context, 'email address')),
                           SizedBox(height: 20.0),
                           TextFormField(
                               cursorColor: darkSlateBlue,
@@ -105,16 +89,8 @@ class _SignupPageState extends State<SignupPage> {
                                 }
                                 return null;
                               },
-                              decoration: InputDecoration(
-                                  filled: true,
-                                  fillColor: Colors.white,
-                                  border: new OutlineInputBorder(
-                                    borderRadius: const BorderRadius.all(
-                                      const Radius.circular(10.0),
-                                    ),
-                                  ),
-                                  hintText: AppLocalizations.of(context)
-                                      .translate('password'))),
+                              decoration:
+                                  WhiteInputDecoration(context, 'password')),
                           SizedBox(height: 80.0),
                           LightBlueButton(
                             titleKeyName: 'Sign up',
@@ -139,6 +115,18 @@ class _SignupPageState extends State<SignupPage> {
                         ])))
               ],
             )));
+  }
+
+  InputDecoration WhiteInputDecoration(BuildContext context, String keyName) {
+    return InputDecoration(
+        filled: true,
+        fillColor: Colors.white,
+        border: new OutlineInputBorder(
+          borderRadius: const BorderRadius.all(
+            const Radius.circular(10.0),
+          ),
+        ),
+        hintText: AppLocalizations.of(context).translate(keyName));
   }
 
   void validateSignUpSubmission() async {

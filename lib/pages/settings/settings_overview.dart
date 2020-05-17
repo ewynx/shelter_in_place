@@ -45,7 +45,7 @@ class SettingsOverview extends StatelessWidget {
                         print('logout');
                         await Provider.of<AuthService>(context).logout();
                         print('logout');
-                        Navigator.pushNamed(context, 'login');
+                        Navigator.pushNamed(context, 'splash-screen');
                       },
                     )))
           ])

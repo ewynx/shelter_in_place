@@ -82,6 +82,10 @@ class MyApp extends StatelessWidget {
                 return MaterialPageRoute(
                   builder: (context) => SignupPage(),
                 );
+              } else if (routeSettings.name == 'splash-screen') {
+                return MaterialPageRoute(
+                  builder: (context) => LoginFirstPage(),
+                );
               } else if (routeSettings.name == 'login') {
                 return MaterialPageRoute(
                   builder: (context) => LoginSecondPage(),

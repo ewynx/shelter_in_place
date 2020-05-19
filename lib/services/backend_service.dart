@@ -1,9 +1,6 @@
 import 'package:shelter_in_place/models/day_model.dart';
-import 'package:localstorage/localstorage.dart';
 
 class BackendService {
-
-  final LocalStorage storage = new LocalStorage('some_key');
 
   List<String> getDays() {
     List<String> days = [];

@@ -14,6 +14,7 @@ class _SocialDistancingState extends State<SocialDistancing> {
   @override
   Widget build(BuildContext context) {
     final dayModel = Provider.of<Day>(context);
+    dayModel.date = new DateTime.now();
     final String assetName = '-g-distanceGraphic.svg';
 
     return SafeArea(

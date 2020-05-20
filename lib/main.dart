@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
 import 'package:shelter_in_place/pages/home.dart';
 import 'package:shelter_in_place/pages/overview_charts.dart';
@@ -11,6 +12,7 @@ import 'package:shelter_in_place/pages/settings/notification_settings.dart';
 import 'package:shelter_in_place/pages/settings/user_settings.dart';
 import 'package:shelter_in_place/pages/summary/new_summary.dart';
 import 'package:shelter_in_place/services/days_service.dart';
+import 'package:path_provider/path_provider.dart' as path_provider;
 
 import 'auth.dart';
 import 'models/day_model.dart';
@@ -19,10 +21,14 @@ import 'pages/login.dart';
 import 'pages/questions/activities.dart';
 import 'pages/questions/feelings.dart';
 
-void main() => runApp(
+Future<void> main() async {
+  runApp(
       ChangeNotifierProvider<AuthService>(
           child: MyApp(), create: (context) => AuthService()),
     );
+  final appDocumentsDirectory = await path_provider.getApplicationDocumentsDirectory();
+  Hive.init(appDocumentsDirectory.path);
+}
 
 class MyApp extends StatelessWidget {
   @override

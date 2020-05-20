@@ -23,6 +23,7 @@ class _ActivitiesState extends State<Activities> {
     List<String> activitiesFromDay = day.getActivities();
     List<String> activities = Constants.activities;
     print("The streak is: " + backendService.getStreak().toString());
+    backendService.addDay(day);
     activitiesFromDay.forEach((activity) =>
       answers[activity] = true
     );

@@ -3,8 +3,6 @@ import 'package:shelter_in_place/pages/util/colors.dart';
 import 'package:shelter_in_place/pages/util/light_blue_button.dart';
 import 'package:shelter_in_place/pages/util/transparant_button.dart';
 
-import '../localization/localizations.dart';
-
 class LoginFirstPage extends StatefulWidget {
   @override
   _LoginFirstPageState createState() => _LoginFirstPageState();
@@ -16,54 +14,56 @@ class _LoginFirstPageState extends State<LoginFirstPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        decoration: new BoxDecoration(color: darkSlateBlue),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: <Widget>[
-            Row(
+    return new WillPopScope(
+        onWillPop: () async => false,
+        child: Container(
+            decoration: new BoxDecoration(color: darkSlateBlue),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
-                Image(
-                  image: AssetImage('wordmark3.png'),
-                  width: 200,
-                )
-              ],
-            ),
-            Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Column(
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Image(
+                      image: AssetImage('wordmark3.png'),
+                      width: 200,
+                    )
+                  ],
+                ),
+                Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      Row(
+                      Column(
                         children: <Widget>[
-                          LightBlueButton(
-                            titleKeyName: 'login button text',
-                            onPressed: () {
-                              Navigator.pushNamed(context, 'login');
-                            },
+                          Row(
+                            children: <Widget>[
+                              LightBlueButton(
+                                titleKeyName: 'login button text',
+                                onPressed: () {
+                                  Navigator.pushNamed(context, 'login');
+                                },
+                              )
+                            ],
+                          ),
+                          SizedBox(height: 20),
+                          Row(
+                            children: <Widget>[
+                              TransparantButton(
+                                titleKeyName: 'Create account',
+                                onPressed: () {
+                                  Navigator.pushNamed(context, 'signup');
+                                },
+                              )
+                            ],
                           )
                         ],
                       ),
-                      SizedBox(height: 20),
-                      Row(
-                        children: <Widget>[
-                          TransparantButton(
-                            titleKeyName: 'Create account',
-                            onPressed: () {
-                              Navigator.pushNamed(context, 'signup');
-                            },
-                          )
-                        ],
-                      )
-                    ],
-                  ),
-                ])
-          ],
-        ));
+                    ])
+              ],
+            )));
   }
 }

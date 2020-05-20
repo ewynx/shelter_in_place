@@ -140,7 +140,7 @@ class _LoginSecondPageState extends State<LoginSecondPage> {
     return showDialog(
       builder: (context) {
         return AlertDialog(
-          title: Text(AppLocalizations.of(context).translate('error message')),
+          title: Text("Error"),
           content: Text(_message),
           actions: <Widget>[
             FlatButton(

@@ -6,7 +6,6 @@ import 'package:shelter_in_place/pages/localization/localizations.dart';
 import 'package:shelter_in_place/pages/questions/shared_const.dart';
 import 'package:shelter_in_place/pages/util/round_checkbox.dart';
 import 'package:shelter_in_place/models/day_model.dart';
-import 'package:shelter_in_place/services/backend_service.dart';
 
 class Activities extends StatefulWidget {
   @override
@@ -19,10 +18,8 @@ class _ActivitiesState extends State<Activities> {
   @override
   Widget build(BuildContext context) {
     final day = Provider.of<Day>(context);
-    final backendService = Provider.of<BackendService>(context);
     List<String> activitiesFromDay = day.getActivities();
     List<String> activities = Constants.activities;
-    print("The streak is: " + backendService.getStreak().toString());
     activitiesFromDay.forEach((activity) =>
       answers[activity] = true
     );

@@ -19,7 +19,7 @@ class _ActivitiesState extends State<Activities> {
   @override
   Widget build(BuildContext context) {
     final day = Provider.of<Day>(context);
-    BackendService backendService = new BackendService();
+    final backendService = Provider.of<BackendService>(context);
     List<String> activitiesFromDay = day.getActivities();
     List<String> activities = Constants.activities;
     print("The streak is: " + backendService.getStreak().toString());

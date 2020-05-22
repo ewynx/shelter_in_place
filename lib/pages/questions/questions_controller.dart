@@ -42,20 +42,16 @@ class _QuestionsControllerState extends State<QuestionsController> {
 
     CustomContinueButton continueButton = CustomContinueButton(
       onPressed: () async {
-        DateTime currentDate = DateTime.now();
-        day.date = currentDate;
-        day.id = currentDate.month.toString() + currentDate.day.toString() + currentDate.year.toString() + currentDate.millisecond.toString();
-        // print(day.date);
-        // print(day.date.toUtc());
-        // print(day.date.toLocal());
-        // print(day.date.toUtc().toLocal());
-        await dayService.addDocument(day.toJson());
+        // await dayService.addDocument(day.toJson());
         double _pageIndex = _pageController.page.roundToDouble();
         if (_pageController.hasClients && _pageIndex < 2) {
           _pageController.nextPage(
               duration: const Duration(milliseconds: 400),
               curve: Curves.easeInOut);
         } else {
+          DateTime currentDate = DateTime.now();
+          day.date = currentDate;
+          day.id = currentDate.month.toString() + currentDate.day.toString() + currentDate.year.toString() + currentDate.millisecond.toString();
           backendService.addDay(day);
           Navigator.pushNamed(context, 'summary');
         }

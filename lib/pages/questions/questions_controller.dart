@@ -6,6 +6,7 @@ import 'package:shelter_in_place/pages/questions/feelings.dart';
 import 'package:shelter_in_place/pages/questions/my_back_button.dart';
 import 'package:shelter_in_place/pages/questions/note.dart';
 import 'package:shelter_in_place/pages/questions/question_bottom_bar.dart';
+import 'package:shelter_in_place/services/backend_service.dart';
 import 'package:shelter_in_place/services/days_service.dart';
 
 import 'my_continue_button.dart';
@@ -35,16 +36,19 @@ class _QuestionsControllerState extends State<QuestionsController> {
   Widget build(BuildContext context) {
     final day = Provider.of<Day>(context);
     final dayService = Provider.of<DaysService>(context);
+    final backendService = Provider.of<BackendService>(context);
     day.activities = new Set();
     day.feelings = new Set();
 
     CustomContinueButton continueButton = CustomContinueButton(
       onPressed: () async {
-        day.date = DateTime.now();
-        print(day.date);
-        print(day.date.toUtc());
-        print(day.date.toLocal());
-        print(day.date.toUtc().toLocal());
+        DateTime currentDate = DateTime.now();
+        day.date = currentDate;
+        day.id = currentDate.month.toString() + currentDate.day.toString() + currentDate.year.toString() + currentDate.millisecond.toString();
+        // print(day.date);
+        // print(day.date.toUtc());
+        // print(day.date.toLocal());
+        // print(day.date.toUtc().toLocal());
         await dayService.addDocument(day.toJson());
         double _pageIndex = _pageController.page.roundToDouble();
         if (_pageController.hasClients && _pageIndex < 2) {
@@ -52,6 +56,7 @@ class _QuestionsControllerState extends State<QuestionsController> {
               duration: const Duration(milliseconds: 400),
               curve: Curves.easeInOut);
         } else {
+          backendService.addDay(day);
           Navigator.pushNamed(context, 'summary');
         }
       },

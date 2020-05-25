@@ -5,13 +5,13 @@ The purpose of this documentation is to help developers better understand the ar
 - [Pages in the Flutter App](#pages-in-the-flutter-app)
 
 ## Pages in the Flutter App
-- [main.dart](#main.dart)
-- [social_distancing.dart](#social_distancing.dart)
-- [questions_controller.dart](#questions_controller.dart)
-- [activities.dart](#activities.dart)
-- [feelings.dart](#feelings.dart)
-- [note.dart](#note.dart)
-- [new_summary.dart](#new_summary.dart)
+- [main.dart](#maindart)
+- [social_distancing.dart](#social_distancingdart)
+- [questions_controller.dart](#questions_controllerdart)
+- [activities.dart](#activitiesdart)
+- [feelings.dart](#feelingsdart)
+- [note.dart](#notedart)
+- [new_summary.dart](#new_summarydart)
 
 ### main.dart
 This defines the main app widget and defines all the routes for the app.

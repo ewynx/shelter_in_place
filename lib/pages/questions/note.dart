@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shelter_in_place/models/day_model.dart';
 import 'package:shelter_in_place/pages/localization/localizations.dart';
-import 'package:shelter_in_place/pages/questions/my_continue_button.dart';
 import 'package:shelter_in_place/pages/util/colors.dart';
-import 'package:shelter_in_place/services/days_service.dart';
 
 class NoteForDay extends StatefulWidget {
   @override

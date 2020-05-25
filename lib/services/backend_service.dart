@@ -19,13 +19,24 @@ class BackendService {
     return File('$path/' + this.databaseFilename);
   }
 
+  Future<String> getDatabaseFileContents() async {
+    final file = await getDatabaseFile();
+    return(await file.readAsString());
+  }
+
   Future<bool> databaseFileExists() async {
     final path = await getDatabasePath();
     return (File('$path/' + this.databaseFilename).exists());
   }
 
-  List<String> getDays() {
-    List<String> days = [];
+  Future<List<Day>> getDays() async {
+    List<Day> days = [];
+    final daysString = await getDatabaseFileContents();
+    Map<String, dynamic> daysMap = jsonDecode(daysString);
+    daysMap.forEach((mapKey, value) {
+      Day newDay = new Day.fromMap(daysMap[mapKey], mapKey);
+      days.add(newDay);
+    });
     return days;
   }
 

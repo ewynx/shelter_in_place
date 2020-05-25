@@ -2,6 +2,7 @@ import 'dart:collection';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shelter_in_place/models/day_model.dart';
 import 'package:shelter_in_place/pages/localization/localizations.dart';
 import 'package:shelter_in_place/pages/questions/question_bottom_bar.dart';
@@ -28,20 +29,21 @@ class NewSummary extends StatelessWidget {
   Widget build(BuildContext context) {
     List<String> feels = Constants.feelings;
     List<String> acts = Constants.activities;
+    Day day1 = Provider.of<Day>(context);
 
     void shuffle() {
       feels.shuffle(Random.secure());
       acts.shuffle(Random.secure());
     }
 
-    Day day1 = Day(
-        id: "first",
-        date: DateTime.now(),
-        socialDistance: true,
-        feelings: feels.take(6).toList().toSet(),
-        activities: acts.take(5).toList().toSet(),
-        note:
-            'Today was a pretty good day! I read a book and went for a run by myself.');
+    // Day day1 = Day(
+    //     id: "first",
+    //     date: DateTime.now(),
+    //     socialDistance: true,
+    //     feelings: feels.take(6).toList().toSet(),
+    //     activities: acts.take(5).toList().toSet(),
+    //     note:
+    //         'Today was a pretty good day! I read a book and went for a run by myself.');
 
     shuffle();
     Day day2 = Day(
@@ -126,6 +128,8 @@ class NewSummary extends StatelessWidget {
         activities: acts.take(2).toList().toSet(),
         note: 'This is the second day');
 
+    List<Day> days = [day1, day2, day3, day4, day5, day6, day7, day8, day9, day10, day11];
+
     String title = AppLocalizations.of(context).translate('streak text') +
         ' 22 ' +
         AppLocalizations.of(context).translate('days') +
@@ -144,19 +148,11 @@ class NewSummary extends StatelessWidget {
                     color: Colors.black,
                   ))),
           Expanded(
-            child: ListView(
-              children: <Widget>[
-                SingleDaySummary(day: day1),
-                SingleDaySummary(day: day2),
-                SingleDaySummary(day: day3),
-                SingleDaySummary(day: day4),
-                SingleDaySummary(day: day5),
-                SingleDaySummary(day: day6),
-                SingleDaySummary(day: day8),
-                SingleDaySummary(day: day9),
-                SingleDaySummary(day: day10),
-                SingleDaySummary(day: day11),
-              ],
+            child: ListView.builder(
+              itemCount: days.length,
+              itemBuilder: (BuildContext buildContext, int index) {
+                return SingleDaySummary(day: days[index]);
+              }
             ),
           )
         ]));

@@ -2,6 +2,7 @@ import 'dart:collection';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:progress_indicators/progress_indicators.dart';
 import 'package:provider/provider.dart';
 import 'package:shelter_in_place/models/day_model.dart';
 import 'package:shelter_in_place/pages/localization/localizations.dart';
@@ -9,6 +10,7 @@ import 'package:shelter_in_place/pages/questions/question_bottom_bar.dart';
 import 'package:shelter_in_place/pages/questions/my_continue_button.dart';
 import 'package:shelter_in_place/pages/questions/shared_const.dart';
 import 'package:shelter_in_place/pages/summary/single_day_summary.dart';
+import 'package:shelter_in_place/services/backend_service.dart';
 
 final List<dynamic> dates = <dynamic>[
   'Sunday, March 22',
@@ -29,6 +31,7 @@ class NewSummary extends StatelessWidget {
   Widget build(BuildContext context) {
     List<String> feels = Constants.feelings;
     List<String> acts = Constants.activities;
+    final backendService = new BackendService();
     Day day1 = Provider.of<Day>(context);
 
     void shuffle() {
@@ -128,7 +131,9 @@ class NewSummary extends StatelessWidget {
         activities: acts.take(2).toList().toSet(),
         note: 'This is the second day');
 
-    List<Day> days = [day1, day2, day3, day4, day5, day6, day7, day8, day9, day10, day11];
+    // List<Day> days = [day1, day2, day3, day4, day5, day6, day7, day8, day9, day10, day11];
+
+    final daysFuture = backendService.getDays();
 
     String title = AppLocalizations.of(context).translate('streak text') +
         ' 22 ' +
@@ -148,10 +153,29 @@ class NewSummary extends StatelessWidget {
                     color: Colors.black,
                   ))),
           Expanded(
-            child: ListView.builder(
-              itemCount: days.length,
-              itemBuilder: (BuildContext buildContext, int index) {
-                return SingleDaySummary(day: days[index]);
+            child: FutureBuilder<List<Day>>(
+              future: daysFuture,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.done) {
+                  if (snapshot.hasError) {
+                    return ErrorWidget(snapshot.toString());
+                  }
+                  List<Day> days = snapshot.data ?? [];
+                  // Add the current day to the days list in case it hasn't been
+                  //  written to the database file yet
+                  if (days[days.length - 1].id != day1.id) {
+                    days.add(day1);
+                  }
+                  return ListView.builder(
+                    itemCount: days.length,
+                    itemBuilder: (BuildContext buildContext, int index) {
+                      return SingleDaySummary(day: days[days.length - index - 1]);
+                    }
+                  );
+                }
+                else {
+                  return JumpingDotsProgressIndicator(fontSize: 100.0, color: Colors.blue);
+                }
               }
             ),
           )

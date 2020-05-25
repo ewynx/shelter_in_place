@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shelter_in_place/models/day_model.dart';
 import 'package:shelter_in_place/pages/questions/activities.dart';
 import 'package:shelter_in_place/pages/questions/feelings.dart';
 import 'package:shelter_in_place/pages/questions/my_back_button.dart';
 import 'package:shelter_in_place/pages/questions/note.dart';
 import 'package:shelter_in_place/pages/questions/question_bottom_bar.dart';
+import 'package:shelter_in_place/pages/util/pref_keys.dart';
 import 'package:shelter_in_place/services/days_service.dart';
 
 import 'my_continue_button.dart';
@@ -52,6 +54,8 @@ class _QuestionsControllerState extends State<QuestionsController> {
               duration: const Duration(milliseconds: 400),
               curve: Curves.easeInOut);
         } else {
+          final prefs = await SharedPreferences.getInstance();
+          prefs.setString(SharedPreferencesKeys.DATE_ANSWERED, DateTime.now().toIso8601String());
           Navigator.pushNamed(context, 'summary');
         }
       },

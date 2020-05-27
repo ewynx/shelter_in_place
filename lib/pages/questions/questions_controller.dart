@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shelter_in_place/models/day_model.dart';
@@ -52,8 +54,9 @@ class _QuestionsControllerState extends State<QuestionsController> {
           DateTime currentDate = DateTime.now();
           day.date = currentDate;
           day.id = currentDate.month.toString() + currentDate.day.toString() + currentDate.year.toString() + currentDate.millisecond.toString();
-          backendService.addDay(day);
-          Navigator.pushNamed(context, 'summary');
+          backendService.addDay(day).then((File returnFile) {
+            Navigator.pushNamed(context, 'summary');
+          });
         }
       },
     );

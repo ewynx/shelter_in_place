@@ -161,11 +161,6 @@ class NewSummary extends StatelessWidget {
                     return ErrorWidget(snapshot.toString());
                   }
                   List<Day> days = snapshot.data ?? [];
-                  // Add the current day to the days list in case it hasn't been
-                  //  written to the database file yet
-                  if (days[days.length - 1].id != day1.id) {
-                    days.add(day1);
-                  }
                   return ListView.builder(
                     itemCount: days.length,
                     itemBuilder: (BuildContext buildContext, int index) {

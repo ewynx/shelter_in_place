@@ -40,7 +40,7 @@ class BackendService {
     return days;
   }
 
-  Future<void> addDay(Day day) async {
+  Future<File> addDay(Day day) async {
     print("Adding the following day to the database file: " + day.toJson().toString());
     Map<String, dynamic> daysMap = Map();
     final file = await getDatabaseFile();
@@ -55,8 +55,7 @@ class BackendService {
 
     // Convert the full json to a string, and write that string to the database file
     String daysString = jsonEncode(daysMap);
-    file.writeAsString('$daysString');
-
+    return file.writeAsString('$daysString');
     // Print the contents of the file after
     // String updatedContents = await file.readAsString();
     // print('The updated contents are: $updatedContents');

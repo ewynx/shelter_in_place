@@ -11,6 +11,7 @@ class BackendService {
 
   Future<String> getDatabasePath() async {
     final directory = await getApplicationDocumentsDirectory();
+    // final directory = await getTemporaryDirectory();
     return(directory.path);
   }
 
@@ -56,26 +57,5 @@ class BackendService {
     // Convert the full json to a string, and write that string to the database file
     String daysString = jsonEncode(daysMap);
     return file.writeAsString('$daysString');
-    // Print the contents of the file after
-    // String updatedContents = await file.readAsString();
-    // print('The updated contents are: $updatedContents');
-  }
-
-  Future<int> getStreak() async {
-    try {
-      final file = await getDatabaseFile();
-      String contents = await file.readAsString();
-      int streak = int.parse(contents);
-      print('The streak is: $streak');
-      return streak;
-    } catch (e) {
-      return 0;
-    }
-  }
-
-  Future<File> updateStreak(int newStreak) async {
-    print('Setting the new streak to: $newStreak');
-    final file = await getDatabaseFile();
-    return file.writeAsString('$newStreak');
   }
 }

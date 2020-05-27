@@ -16,7 +16,9 @@ import 'package:shelter_in_place/services/days_service.dart';
 import 'auth.dart';
 import 'models/day_model.dart';
 import 'pages/localization/localizations.dart';
-import 'pages/login.dart';
+import 'pages/login/login_screen_1.dart';
+import 'pages/login/login_screen_2.dart';
+import 'pages/login/signup_screen.dart';
 import 'pages/questions/activities.dart';
 import 'pages/questions/feelings.dart';
 
@@ -58,7 +60,7 @@ class MyApp extends StatelessWidget {
               future: Provider.of<AuthService>(context).getUser(),
               builder: (context, AsyncSnapshot<FirebaseUser> snapshot) {
                 if (snapshot.connectionState == ConnectionState.done) {
-                  return snapshot.hasData ? SocialDistancing() : LoginPage();
+                  return snapshot.hasData ? SocialDistancing() : LoginFirstPage();
                 } else {
                   // show loading indicator
                   return Container(color: Colors.white);
@@ -80,9 +82,17 @@ class MyApp extends StatelessWidget {
                 return MaterialPageRoute(
                   builder: (context) => HomePage(),
                 );
+              } else if (routeSettings.name == 'signup') {
+                return MaterialPageRoute(
+                  builder: (context) => SignupPage(),
+                );
+              } else if (routeSettings.name == 'splash-screen') {
+                return MaterialPageRoute(
+                  builder: (context) => LoginFirstPage(),
+                );
               } else if (routeSettings.name == 'login') {
                 return MaterialPageRoute(
-                  builder: (context) => LoginPage(),
+                  builder: (context) => LoginSecondPage(),
                 );
               } else if (routeSettings.name == 'user-settings') {
                 return MaterialPageRoute(

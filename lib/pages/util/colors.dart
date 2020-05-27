@@ -21,3 +21,4 @@ Color darkBlueButton = Colors.lightBlue[900];
 Color powderBlue = Colors.blue[100];
 Color lightGrey = Colors.grey[200];
 Color darkSlateBlue = Color.fromRGBO(30, 54, 91, 1);
+Color transparent = Color(0x00000000);

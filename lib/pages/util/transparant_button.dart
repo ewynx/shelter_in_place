@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:shelter_in_place/pages/util/colored_button.dart';
 import 'package:shelter_in_place/pages/util/colors.dart';
 
-class BlueButton extends StatelessWidget {
-  BlueButton({@required this.titleKeyName, @required this.onPressed});
+class TransparantButton extends StatelessWidget {
+  TransparantButton({@required this.titleKeyName, @required this.onPressed});
 
   final GestureTapCallback onPressed;
   final String titleKeyName;
@@ -11,8 +11,8 @@ class BlueButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MyColoredButton(
-        buttonColor: darkSlateBlue,
-        borderColor: darkSlateBlue,
+        buttonColor: transparent,
+        borderColor: Colors.white,
         titleKeyName: this.titleKeyName,
         onPressed: this.onPressed);
   }

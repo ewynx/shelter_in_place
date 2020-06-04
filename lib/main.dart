@@ -10,6 +10,7 @@ import 'package:shelter_in_place/pages/questions/social_distancing.dart';
 import 'package:shelter_in_place/pages/settings/notification_settings.dart';
 import 'package:shelter_in_place/pages/settings/user_settings.dart';
 import 'package:shelter_in_place/pages/summary/new_summary.dart';
+import 'package:shelter_in_place/services/backend_service.dart';
 import 'package:shelter_in_place/services/days_service.dart';
 
 import 'auth.dart';
@@ -32,10 +33,13 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
         providers: [
           Provider<Day>(
-            builder: (context) => Day(),
+            create: (context) => Day(),
           ),
           Provider<DaysService>(
-            builder: (context) => DaysService(),
+            create: (context) => DaysService(),
+          ),
+          Provider<BackendService>(
+            create: (context) => BackendService(),
           )
         ],
         child: MaterialApp(

@@ -1,8 +1,9 @@
-# App Architecture
-The purpose of this documentation is to help developers better understand the architecture of the app, including the backend authentication, data storage, and the various pages in the Flutter app.
+# Developer Notes
+The purpose of this documentation is to help developers better understand the design of the app, including the backend authentication, data storage, and the various pages in the Flutter app.
 
 ## Contents
 - [Pages in the Flutter App](#pages-in-the-flutter-app)
+- [Style Guide](#style-guide)
 
 ## Pages in the Flutter App
 - [main.dart](#maindart)
@@ -33,3 +34,19 @@ This page asks the user to input a note about the day. The string value of the n
 
 ### new_summary.dart
 This page displays a list of widgets for each day explicitly defined in this file, starting with an entry with today's date. Each widget contains summary information defined in `single_day_summary.dart`, which includes a list of activities and feelings and a note from that day. Each day is assigned a certain smiley face based on the aggregate score of feelings for that day. The scores for each feeling are defined in `mood_const.dart`.
+
+## Style Guide
+
+This section of the documentation explains some common styling aspects of the app, including common widgets and colors used.
+
+### Loading Widget
+
+As implemented in this commit, use the following widget on any loading screen:
+
+```
+import 'package:progress_indicators/progress_indicators.dart';
+...
+JumpingDotsProgressIndicator(fontSize: 100.0, color: Colors.blue);
+```
+
+See the [pub.dev documentation](https://pub.dev/packages/progress_indicators) for more information about `progress_indicators.dart`.

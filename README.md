@@ -5,4 +5,3 @@ This Flutter app was started during Datavant's Pandemic Response Hackathon. For 
 ## Additional Resources
 
 - [App Architecture](app-architecture.md)
-- [Developer Notes](notes.md)

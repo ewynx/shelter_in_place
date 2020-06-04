@@ -44,7 +44,6 @@ class _QuestionsControllerState extends State<QuestionsController> {
 
     CustomContinueButton continueButton = CustomContinueButton(
       onPressed: () async {
-        // await dayService.addDocument(day.toJson());
         double _pageIndex = _pageController.page.roundToDouble();
         if (_pageController.hasClients && _pageIndex < 2) {
           _pageController.nextPage(

@@ -32,106 +32,13 @@ class NewSummary extends StatelessWidget {
     List<String> feels = Constants.feelings;
     List<String> acts = Constants.activities;
     final backendService = new BackendService();
-    Day day1 = Provider.of<Day>(context);
 
     void shuffle() {
       feels.shuffle(Random.secure());
       acts.shuffle(Random.secure());
     }
 
-    // Day day1 = Day(
-    //     id: "first",
-    //     date: DateTime.now(),
-    //     socialDistance: true,
-    //     feelings: feels.take(6).toList().toSet(),
-    //     activities: acts.take(5).toList().toSet(),
-    //     note:
-    //         'Today was a pretty good day! I read a book and went for a run by myself.');
-
     shuffle();
-    Day day2 = Day(
-        id: "second",
-        date: new DateTime(2020, 3, 28),
-        socialDistance: true,
-        feelings: feels.take(6).toList().toSet(),
-        activities: acts.take(4).toList().toSet(),
-        note: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ');
-
-    shuffle();
-    Day day3 = Day(
-        id: "third",
-        date: new DateTime(2020, 3, 27),
-        socialDistance: true,
-        feelings: feels.take(6).toList().toSet(),
-        activities: acts.take(3).toList().toSet(),
-        note: 'This is the second day');
-
-    shuffle();
-    Day day4 = Day(
-        id: "fourth",
-        date: new DateTime(2020, 3, 26),
-        socialDistance: true,
-        feelings: feels.take(6).toList().toSet(),
-        activities: acts.take(2).toList().toSet(),
-        note: 'This is the second day');
-
-    Day day5 = Day(
-        id: "fifth",
-        date: new DateTime(2020, 3, 25),
-        socialDistance: true,
-        feelings: feels.take(6).toList().toSet(),
-        activities: acts.take(4).toList().toSet(),
-        note: 'This is the second day');
-
-    shuffle();
-    Day day6 = Day(
-        id: "sixth",
-        date: new DateTime(2020, 3, 24),
-        socialDistance: true,
-        feelings: feels.take(6).toList().toSet(),
-        activities: acts.take(2).toList().toSet(),
-        note: 'This is the second day');
-
-    shuffle();
-    Day day7 = Day(
-        id: "seventh",
-        date: new DateTime(2020, 3, 23),
-        socialDistance: true,
-        feelings: feels.take(6).toList().toSet(),
-        activities: acts.take(2).toList().toSet(),
-        note: 'This is the second day');
-
-    shuffle();
-    Day day8 = Day(
-        id: "seventh",
-        date: new DateTime(2020, 3, 22),
-        socialDistance: true,
-        feelings: feels.take(6).toList().toSet(),
-        activities: acts.take(2).toList().toSet(),
-        note: 'This is the second day');
-    Day day9 = Day(
-        id: "seventh",
-        date: new DateTime(2020, 3, 21),
-        socialDistance: true,
-        feelings: feels.take(6).toList().toSet(),
-        activities: acts.take(2).toList().toSet(),
-        note: 'This is the second day');
-    Day day10 = Day(
-        id: "seventh",
-        date: new DateTime(2020, 3, 20),
-        socialDistance: true,
-        feelings: feels.take(6).toList().toSet(),
-        activities: acts.take(2).toList().toSet(),
-        note: 'This is the second day');
-    Day day11 = Day(
-        id: "seventh",
-        date: new DateTime(2020, 3, 19),
-        socialDistance: true,
-        feelings: feels.take(6).toList().toSet(),
-        activities: acts.take(2).toList().toSet(),
-        note: 'This is the second day');
-
-    // List<Day> days = [day1, day2, day3, day4, day5, day6, day7, day8, day9, day10, day11];
 
     final daysFuture = backendService.getDays();
 

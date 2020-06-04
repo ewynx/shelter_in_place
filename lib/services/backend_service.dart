@@ -11,7 +11,6 @@ class BackendService {
 
   Future<String> getDatabasePath() async {
     final directory = await getApplicationDocumentsDirectory();
-    // final directory = await getTemporaryDirectory();
     return(directory.path);
   }
 

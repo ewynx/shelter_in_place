@@ -71,5 +71,11 @@
   "go back": "Go back",
   "Sign up": "Sign up",
   "enter name": "Please enter your name",
-  "name": "Name"
+  "name": "Name",
+"Content" : "Content",
+"Energetic": "Energetic",
+"Relaxed": "Relaxed",
+"Inspired": "Inspired",
+"Sad/Depressed": "Sad/Depressed",
+"Tired" : "Tired"
 }

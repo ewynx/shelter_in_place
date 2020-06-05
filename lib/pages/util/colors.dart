@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
+Color indigo1 = Colors.indigo[400];
+Color indigo2 = Colors.indigo[300];
+Color indigo3 = Colors.indigo[200];
 Color purple = Colors.deepPurple[200];
-Color indigo = Colors.indigo[400];
+Color purple2 = Colors.deepPurple[100];
 Color darkerIndigo = Colors.indigo[600];
 Color teal = Colors.tealAccent[100];
 Color blue = Colors.blue[200];
@@ -11,10 +14,15 @@ Color darkBrown = Colors.brown[600];
 Color brown = Colors.brown[200];
 
 Color cyan = Colors.cyan[100];
-Color orange = Colors.deepOrange[200];
 Color pink = Colors.pink[100];
-Color yellow = Colors.amber[200];
-Color yellow2 = Colors.yellow[300];
+
+Color orange = Colors.deepOrange[200];
+Color yellow1 = Colors.amber[500];
+Color yellow2 = Colors.amber[300];
+Color yellow3 = Colors.yellow[500];
+Color yellow4 = Colors.yellow[300];
+Color yellow5 = Colors.amber[100];
+
 
 Color green = Colors.lightGreenAccent[100];
 
@@ -26,5 +34,7 @@ Color outerCircleOrange = Colors.orange[100];
 Color darkBlueButton = Colors.lightBlue[900];
 Color powderBlue = Colors.blue[100];
 Color lightGrey = Colors.grey[200];
+Color darkerGrey = Colors.grey[300];
+Color grey = Colors.grey[600];
 Color darkSlateBlue = Color.fromRGBO(30, 54, 91, 1);
 Color transparent = Color(0x00000000);

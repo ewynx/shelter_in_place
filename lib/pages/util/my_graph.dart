@@ -26,10 +26,10 @@ class StackedHorizontalBarChart extends StatelessWidget {
   }
 }
 
-/// Sample ordinal data type.
-class OrdinalSales {
-  final String year;
-  final int sales;
+class OrdinalFeeling {
+  final String feeling;
+  final DateTime date;
+  final int value = 1;
 
-  OrdinalSales(this.year, this.sales);
+  OrdinalFeeling(this.feeling, this.date);
 }

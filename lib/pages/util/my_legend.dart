@@ -1,6 +1,7 @@
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
+import 'package:shelter_in_place/pages/questions/shared_const.dart';
 
 import 'my_legend_item.dart';
 
@@ -25,7 +26,6 @@ class SimpleLegenda extends StatelessWidget {
         padding: const EdgeInsets.all(1.0),
         mainAxisSpacing: 4.0,
         crossAxisSpacing: 4.0,
-        // Generate 100 widgets that display their index in the List.
         children: legendElements);
 
     return ConstrainedBox(

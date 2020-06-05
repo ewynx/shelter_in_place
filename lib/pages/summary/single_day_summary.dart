@@ -111,10 +111,10 @@ Icon getMoodIcon(Day day) {
     color = purple;
   } else if (points < 0) {
     data = Icons.sentiment_very_dissatisfied;
-    color = indigo;
+    color = indigo1;
   } else if (points > 0 && points < 4) {
     data = Icons.sentiment_satisfied;
-    color = yellow;
+    color = yellow1;
   } else {
     data = Icons.sentiment_very_satisfied;
     color = orange;

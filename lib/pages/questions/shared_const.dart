@@ -7,9 +7,9 @@ class Constants {
   static final List<String> feelings = [
     "Happy",
     "Angry",
-    "Relaxed",
-    "Anxious",
     "Content",
+    "Anxious",
+    "Relaxed",
     "Sad/Depressed",
     "Energetic",
     "Tired",
@@ -19,17 +19,17 @@ class Constants {
 
   HashMap<String, Color> colorsFeelings() {
     HashMap colorsFeelings = new HashMap<String, Color>();
-    colorsFeelings.putIfAbsent("Relaxed", () => cyan);
-    colorsFeelings.putIfAbsent("Happy", () => orange);
-    colorsFeelings.putIfAbsent("Inspired", () => pink);
-    colorsFeelings.putIfAbsent("Content", () => yellow);
-    colorsFeelings.putIfAbsent("Energetic", () => yellow2);
+    colorsFeelings.putIfAbsent("Relaxed", () => yellow5);
+    colorsFeelings.putIfAbsent("Happy", () => yellow1);
+    colorsFeelings.putIfAbsent("Inspired", () => yellow2);
+    colorsFeelings.putIfAbsent("Content", () => yellow3);
+    colorsFeelings.putIfAbsent("Energetic", () => yellow4);
 
     colorsFeelings.putIfAbsent("Anxious", () => purple);
-    colorsFeelings.putIfAbsent("Sad/Depressed", () => indigo);
-    colorsFeelings.putIfAbsent("Angry", () => red);
-    colorsFeelings.putIfAbsent("Scared", () => darkerIndigo);
-    colorsFeelings.putIfAbsent("Tired", () => lightRed);
+    colorsFeelings.putIfAbsent("Sad/Depressed", () => indigo2);
+    colorsFeelings.putIfAbsent("Angry", () => indigo1);
+    colorsFeelings.putIfAbsent("Scared", () => indigo3);
+    colorsFeelings.putIfAbsent("Tired", () => purple2);
 
     return colorsFeelings;
   }
@@ -67,9 +67,9 @@ class Constants {
     HashMap colorsActivitities = new HashMap<String, Color>();
     addColorEntry(activities[0], purple, colorsActivitities);
     addColorEntry(activities[1], cyan, colorsActivitities);
-    addColorEntry(activities[2], indigo, colorsActivitities);
+    addColorEntry(activities[2], indigo1, colorsActivitities);
     addColorEntry(activities[3], pink, colorsActivitities);
-    addColorEntry(activities[4], yellow, colorsActivitities);
+    addColorEntry(activities[4], yellow1, colorsActivitities);
     addColorEntry(activities[5], orange, colorsActivitities);
     addColorEntry(activities[6], teal, colorsActivitities);
     addColorEntry(activities[7], blue, colorsActivitities);
@@ -80,11 +80,12 @@ class Constants {
     return colorsActivitities;
   }
 
-  void addIconEntry(String keyname, IconData icon, HashMap<String, IconData> map) {
+  void addIconEntry(
+      String keyname, IconData icon, HashMap<String, IconData> map) {
     map.putIfAbsent(keyname, () => icon);
     map.putIfAbsent(shortActivities()[keyname], () => icon);
   }
-  
+
   HashMap<String, IconData> iconActivitities() {
     HashMap iconsForActivities = new HashMap<String, IconData>();
     addIconEntry("walk", Icons.directions_walk, iconsForActivities);
@@ -93,11 +94,11 @@ class Constants {
     addIconEntry("cook", Icons.restaurant, iconsForActivities);
     addIconEntry("exercise", Icons.accessibility_new, iconsForActivities);
     addIconEntry("call", Icons.call, iconsForActivities);
-    addIconEntry("videogames", Icons.videogame_asset , iconsForActivities);
+    addIconEntry("videogames", Icons.videogame_asset, iconsForActivities);
     addIconEntry("nap", Icons.local_hospital, iconsForActivities);
     addIconEntry("clean", Icons.local_laundry_service, iconsForActivities);
-    addIconEntry("groceries", Icons.local_grocery_store , iconsForActivities);
-    addIconEntry("meditate", Icons.spa , iconsForActivities);
+    addIconEntry("groceries", Icons.local_grocery_store, iconsForActivities);
+    addIconEntry("meditate", Icons.spa, iconsForActivities);
     addIconEntry("other", Icons.grade, iconsForActivities);
     return iconsForActivities;
   }

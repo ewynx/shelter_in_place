@@ -11,7 +11,11 @@ class StackedHorizontalBarChart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // For horizontal bar charts, set the [vertical] flag to false.
-    return new charts.BarChart(seriesList,
+    return new ConstrainedBox(
+        constraints: new BoxConstraints(
+        maxHeight: 30.0,
+    ),
+    child:new charts.BarChart(seriesList,
         animate: animate,
         barGroupingType: charts.BarGroupingType.stacked,
         vertical: false,
@@ -22,7 +26,7 @@ class StackedHorizontalBarChart extends StatelessWidget {
             showAxisLine: true,
             // But don't draw anything else.
             renderSpec: new charts.NoneRenderSpec()),
-    );
+    ));
   }
 }
 

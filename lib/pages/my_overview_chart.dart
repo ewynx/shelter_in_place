@@ -1,74 +1,51 @@
-import 'dart:collection';
-
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/material.dart';
+import 'package:shelter_in_place/models/day_model.dart';
+import 'package:shelter_in_place/pages/questions/shared_const.dart';
 import 'package:shelter_in_place/pages/util/my_graph.dart';
-import 'package:shelter_in_place/pages/util/colors.dart';
-
-import 'util/colors.dart';
 
 class SingleOverviewChart extends StatelessWidget {
-  SingleOverviewChart();
+  SingleOverviewChart({@required this.days});
 
-  /// Create series list with multiple series
-  static List<charts.Series<OrdinalFeeling, String>>
-      _createSampleDataFeelings() {
-    final DateTime today = DateTime.now();
-    final happyData = [
-      new OrdinalFeeling('Happy', today),
-    ];
-
-    final angryData = [
-      new OrdinalFeeling('Angry', today),
-    ];
-
-    final sadData = [
-      new OrdinalFeeling('Sad/Depressed', today),
-    ];
-
-    return [
-      new charts.Series<OrdinalFeeling, String>(
-        id: 'Angry',
-        domainFn: (OrdinalFeeling feeling, _) => feeling.date.toIso8601String(),
-        measureFn: (OrdinalFeeling feeling, _) => feeling.value,
-        data: angryData,
-        colorFn: (_, __) => getChartColor(indigo1),
-      ),
-      new charts.Series<OrdinalFeeling, String>(
-        id: 'Sad/Depressed',
-        domainFn: (OrdinalFeeling feeling, _) => feeling.date.toIso8601String(),
-        measureFn: (OrdinalFeeling feeling, _) => feeling.value,
-        data: sadData,
-        colorFn: (_, __) => getChartColor(purple2),
-      ),
-      new charts.Series<OrdinalFeeling, String>(
-        id: 'Happy',
-        domainFn: (OrdinalFeeling feeling, _) => feeling.date.toIso8601String(),
-        measureFn: (OrdinalFeeling feeling, _) => feeling.value,
-        data: happyData,
-        colorFn: (_, __) => getChartColor(yellow1),
-      ),
-    ];
-  }
+  final List<Day> days;
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-        child: Column(
-      children: <Widget>[
-        ConstrainedBox(
-          constraints: BoxConstraints.expand(height: 30.0),
-          child: StackedHorizontalBarChart(
-            _createSampleDataFeelings(),
-            animate: true,
-          ),
-        ),
-      ],
-    ));
+    return StackedHorizontalBarChart(getDataFromDays(days),
+              animate: true);
   }
 }
 
 charts.Color getChartColor(Color color) {
   return charts.Color(
       r: color.red, g: color.green, b: color.blue, a: color.alpha);
+}
+
+// Per feeling we make a separate Series with its own color
+charts.Series<OrdinalFeeling, String> getSeries(
+    List<OrdinalFeeling> res, String feeling) {
+  var series = new charts.Series<OrdinalFeeling, String>(
+    id: feeling,
+    domainFn: (OrdinalFeeling data, _) => data.date.toIso8601String(),
+    measureFn: (OrdinalFeeling data, _) => data.value,
+    data: res.where((element) => element.feeling == feeling).toList(),
+    colorFn: (_, __) => getChartColor(Constants().colorsFeelings()[feeling]),
+  );
+  return series;
+}
+
+// The days are transformed into a list of data containing feelings per day
+List<charts.Series<OrdinalFeeling, String>> getDataFromDays(List<Day> days) {
+  List<OrdinalFeeling> data = [];
+  for (var day in days) {
+    data.addAll(
+        day.feelings.map((feeling) => new OrdinalFeeling(feeling, day.date)));
+  }
+
+  List<charts.Series<OrdinalFeeling, String>> series = [];
+
+  for (var feeling in Constants.feelings) {
+    series.add(getSeries(data, feeling));
+  }
+  return series;
 }

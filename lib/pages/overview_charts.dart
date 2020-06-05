@@ -1,12 +1,14 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:progress_indicators/progress_indicators.dart';
 import 'package:provider/provider.dart';
 import 'package:shelter_in_place/models/day_model.dart';
 import 'package:shelter_in_place/pages/localization/localizations.dart';
 import 'package:shelter_in_place/pages/questions/shared_const.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shelter_in_place/pages/util/my_legend.dart';
+import 'package:shelter_in_place/services/backend_service.dart';
 import '../auth.dart';
 
 import 'my_overview_chart.dart';
@@ -19,14 +21,9 @@ class MyOverviewChart extends StatefulWidget {
 class _MyOverviewChartState extends State<MyOverviewChart> {
   @override
   Widget build(BuildContext context) {
-    List<String> shuffledFeelings = Constants.feelings;
-    shuffledFeelings.shuffle(Random.secure());
-
-    List<String> shuffledActivities = Constants.activities;
-    shuffledActivities.shuffle(Random.secure());
-
-    List<SingleOverviewChart> charts =
-        new List<SingleOverviewChart>.generate(7, (i) => SingleOverviewChart());
+    final backendService = new BackendService();
+    // Get days for correct month
+    final daysFuture = backendService.getDays();
 
     return Container(
         padding: EdgeInsets.all(15.0),
@@ -43,20 +40,27 @@ class _MyOverviewChartState extends State<MyOverviewChart> {
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
                     ))),
-            Card(
-                margin: EdgeInsets.fromLTRB(20, 10, 20, 10),
-                child: Column(
-                  children: <Widget>[
-                    SizedBox(height: 20.0),
-                    SimpleLegenda(
-                        items: Constants.feelings,
-                        height: 110.0,
-                        colors: Constants().colorsFeelings()),
-                    for (var item in charts) item,
-                    SizedBox(height: 20.0),
-
-                  ],
-                ))
+            SimpleLegenda(
+                items: Constants.feelings,
+                height: 120.0,
+                colors: Constants().colorsFeelings()),
+            SizedBox(height: 20.0),
+            Expanded(
+                child: FutureBuilder<List<Day>>(
+                    future: daysFuture,
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.done) {
+                        if (snapshot.hasError) {
+                          return ErrorWidget(snapshot.toString());
+                        }
+                        // Take the last 7 entries if possible
+                        List<Day> days = snapshot.data.take(7).toList() ?? [];
+                        return SingleOverviewChart(days: days);
+                      } else {
+                        return JumpingDotsProgressIndicator(
+                            fontSize: 100.0, color: Colors.blue);
+                      }
+                    }))
           ],
         ));
   }

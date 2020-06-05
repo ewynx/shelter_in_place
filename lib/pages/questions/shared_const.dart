@@ -7,32 +7,30 @@ class Constants {
   static final List<String> feelings = [
     "Happy",
     "Angry",
-    "Depressed",
-    "Joyful",
-    "Surprised",
-    "Excited",
-    "Sad",
-    "Silly",
+    "Relaxed",
     "Anxious",
-    "Scared",
-    "Calm",
-    "Distracted"
+    "Content",
+    "Sad/Depressed",
+    "Energetic",
+    "Tired",
+    "Inspired",
+    "Scared"
   ];
 
   HashMap<String, Color> colorsFeelings() {
     HashMap colorsFeelings = new HashMap<String, Color>();
-    colorsFeelings.putIfAbsent(feelings[0], () => purple);
-    colorsFeelings.putIfAbsent(feelings[1], () => cyan);
-    colorsFeelings.putIfAbsent(feelings[2], () => indigo);
-    colorsFeelings.putIfAbsent(feelings[3], () => pink);
-    colorsFeelings.putIfAbsent(feelings[4], () => yellow);
-    colorsFeelings.putIfAbsent(feelings[5], () => orange);
-    colorsFeelings.putIfAbsent(feelings[6], () => teal);
-    colorsFeelings.putIfAbsent(feelings[7], () => blue);
-    colorsFeelings.putIfAbsent(feelings[8], () => red);
-    colorsFeelings.putIfAbsent(feelings[9], () => yellow2);
-    colorsFeelings.putIfAbsent(feelings[10], () => green);
-    colorsFeelings.putIfAbsent(feelings[11], () => brown);
+    colorsFeelings.putIfAbsent("Relaxed", () => cyan);
+    colorsFeelings.putIfAbsent("Happy", () => orange);
+    colorsFeelings.putIfAbsent("Inspired", () => pink);
+    colorsFeelings.putIfAbsent("Content", () => yellow);
+    colorsFeelings.putIfAbsent("Energetic", () => yellow2);
+
+    colorsFeelings.putIfAbsent("Anxious", () => purple);
+    colorsFeelings.putIfAbsent("Sad/Depressed", () => indigo);
+    colorsFeelings.putIfAbsent("Angry", () => red);
+    colorsFeelings.putIfAbsent("Scared", () => darkerIndigo);
+    colorsFeelings.putIfAbsent("Tired", () => lightRed);
+
     return colorsFeelings;
   }
 
@@ -47,6 +45,7 @@ class Constants {
     "clean",
     "walk",
     "groceries",
+    "meditate",
     "other"
   ];
 
@@ -59,24 +58,47 @@ class Constants {
     return shortActivities;
   }
 
-  void addEntries(String keyname, Color color, HashMap<String, Color> map) {
+  void addColorEntry(String keyname, Color color, HashMap<String, Color> map) {
     map.putIfAbsent(keyname, () => color);
     map.putIfAbsent(shortActivities()[keyname], () => color);
   }
 
   HashMap<String, Color> colorsActivitities() {
     HashMap colorsActivitities = new HashMap<String, Color>();
-    addEntries(activities[0], purple, colorsActivitities);
-    addEntries(activities[1], cyan, colorsActivitities);
-    addEntries(activities[2], indigo, colorsActivitities);
-    addEntries(activities[3], pink, colorsActivitities);
-    addEntries(activities[4], yellow, colorsActivitities);
-    addEntries(activities[5], orange, colorsActivitities);
-    addEntries(activities[6], teal, colorsActivitities);
-    addEntries(activities[7], blue, colorsActivitities);
-    addEntries(activities[8], red, colorsActivitities);
-    addEntries(activities[9], yellow2, colorsActivitities);
-    addEntries(activities[10], green, colorsActivitities);
+    addColorEntry(activities[0], purple, colorsActivitities);
+    addColorEntry(activities[1], cyan, colorsActivitities);
+    addColorEntry(activities[2], indigo, colorsActivitities);
+    addColorEntry(activities[3], pink, colorsActivitities);
+    addColorEntry(activities[4], yellow, colorsActivitities);
+    addColorEntry(activities[5], orange, colorsActivitities);
+    addColorEntry(activities[6], teal, colorsActivitities);
+    addColorEntry(activities[7], blue, colorsActivitities);
+    addColorEntry(activities[8], red, colorsActivitities);
+    addColorEntry(activities[9], yellow2, colorsActivitities);
+    addColorEntry(activities[10], green, colorsActivitities);
+    addColorEntry(activities[11], lightRed, colorsActivitities);
     return colorsActivitities;
+  }
+
+  void addIconEntry(String keyname, IconData icon, HashMap<String, IconData> map) {
+    map.putIfAbsent(keyname, () => icon);
+    map.putIfAbsent(shortActivities()[keyname], () => icon);
+  }
+  
+  HashMap<String, IconData> iconActivitities() {
+    HashMap iconsForActivities = new HashMap<String, IconData>();
+    addIconEntry("walk", Icons.directions_walk, iconsForActivities);
+    addIconEntry("tv", Icons.tv, iconsForActivities);
+    addIconEntry("read", Icons.library_books, iconsForActivities);
+    addIconEntry("cook", Icons.restaurant, iconsForActivities);
+    addIconEntry("exercise", Icons.accessibility_new, iconsForActivities);
+    addIconEntry("call", Icons.call, iconsForActivities);
+    addIconEntry("videogames", Icons.videogame_asset , iconsForActivities);
+    addIconEntry("nap", Icons.local_hospital, iconsForActivities);
+    addIconEntry("clean", Icons.local_laundry_service, iconsForActivities);
+    addIconEntry("groceries", Icons.local_grocery_store , iconsForActivities);
+    addIconEntry("meditate", Icons.spa , iconsForActivities);
+    addIconEntry("other", Icons.grade, iconsForActivities);
+    return iconsForActivities;
   }
 }

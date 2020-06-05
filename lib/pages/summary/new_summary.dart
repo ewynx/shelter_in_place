@@ -29,17 +29,7 @@ final List<dynamic> dates = <dynamic>[
 class NewSummary extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    List<String> feels = Constants.feelings;
-    List<String> acts = Constants.activities;
     final backendService = new BackendService();
-
-    void shuffle() {
-      feels.shuffle(Random.secure());
-      acts.shuffle(Random.secure());
-    }
-
-    shuffle();
-
     final daysFuture = backendService.getDays();
 
     String title = AppLocalizations.of(context).translate('streak text') +

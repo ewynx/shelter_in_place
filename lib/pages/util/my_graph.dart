@@ -13,20 +13,21 @@ class StackedHorizontalBarChart extends StatelessWidget {
     // For horizontal bar charts, set the [vertical] flag to false.
     return new ConstrainedBox(
         constraints: new BoxConstraints(
-        maxHeight: 30.0,
-    ),
-    child:new charts.BarChart(seriesList,
-        animate: animate,
-        barGroupingType: charts.BarGroupingType.stacked,
-        vertical: false,
-        primaryMeasureAxis:
-            new charts.NumericAxisSpec(renderSpec: new charts.NoneRenderSpec()),
-        domainAxis: new charts.OrdinalAxisSpec(
-            // Make sure that we draw the domain axis line.
-            showAxisLine: true,
-            // But don't draw anything else.
-            renderSpec: new charts.NoneRenderSpec()),
-    ));
+          maxHeight: 30.0,
+        ),
+        child: new charts.BarChart(
+          seriesList,
+          animate: animate,
+          barGroupingType: charts.BarGroupingType.stacked,
+          vertical: false,
+          primaryMeasureAxis: new charts.NumericAxisSpec(
+              renderSpec: new charts.NoneRenderSpec()),
+          domainAxis: new charts.OrdinalAxisSpec(
+              // Make sure that we draw the domain axis line.
+              showAxisLine: true,
+              // But don't draw anything else.
+              renderSpec: new charts.NoneRenderSpec()),
+        ));
   }
 }
 

@@ -55,7 +55,7 @@ class _MyOverviewChartState extends State<MyOverviewChart> {
                         }
                         // Take the last 7 entries if possible
                         List<Day> days = snapshot.data.take(7).toList() ?? [];
-                        return SingleOverviewChart(days: days);
+                        return OverviewChart(days: days);
                       } else {
                         return JumpingDotsProgressIndicator(
                             fontSize: 100.0, color: Colors.blue);

@@ -19,17 +19,17 @@ class Constants {
 
   HashMap<String, Color> colorsFeelings() {
     HashMap colorsFeelings = new HashMap<String, Color>();
-    colorsFeelings.putIfAbsent("Relaxed", () => yellow5);
+    colorsFeelings.putIfAbsent("Relaxed", () => cyan);
     colorsFeelings.putIfAbsent("Happy", () => yellow1);
-    colorsFeelings.putIfAbsent("Inspired", () => yellow2);
+    colorsFeelings.putIfAbsent("Inspired", () => teal);
     colorsFeelings.putIfAbsent("Content", () => yellow3);
-    colorsFeelings.putIfAbsent("Energetic", () => yellow4);
+    colorsFeelings.putIfAbsent("Energetic", () => powderBlue);
 
     colorsFeelings.putIfAbsent("Anxious", () => purple);
     colorsFeelings.putIfAbsent("Sad/Depressed", () => indigo2);
-    colorsFeelings.putIfAbsent("Angry", () => indigo1);
-    colorsFeelings.putIfAbsent("Scared", () => indigo3);
-    colorsFeelings.putIfAbsent("Tired", () => purple2);
+    colorsFeelings.putIfAbsent("Angry", () => red);
+    colorsFeelings.putIfAbsent("Scared", () => darkerGrey2);
+    colorsFeelings.putIfAbsent("Tired", () => darkerGrey);
 
     return colorsFeelings;
   }

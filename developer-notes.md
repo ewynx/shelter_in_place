@@ -4,6 +4,7 @@ The purpose of this documentation is to help developers better understand the de
 ## Contents
 - [Pages in the Flutter App](#pages-in-the-flutter-app)
 - [Style Guide](#style-guide)
+- [Backend Storage](#backend-storage)
 
 ## Pages in the Flutter App
 - [main.dart](#maindart)
@@ -50,3 +51,9 @@ JumpingDotsProgressIndicator(fontSize: 100.0, color: Colors.blue);
 ```
 
 See the [pub.dev documentation](https://pub.dev/packages/progress_indicators) for more information about `progress_indicators.dart`.
+
+## Backend Storage
+
+This section explains how user-inputted data is stored when using the app. Each new day entry is added to a JSON text file on the user's device. This file lives in the application documents directory for the Distince app. When the app is deleted from the user's device, this directory and its files will also be deleted.
+
+The [backend_service.dart](lib/services/backend-service.dart) file performs all the backend storage operations in the app. This service uses the the [`path_provider`](https://pub.dev/packages/path_provider) plugin to retrieve the application documents directory for the app. When testing the application as a developer, the `getTemporaryDirectory()` method of the `path_provider` plugin allows the application to write any inputted data to a temporary directory that is deleted when the app is closed. See [this commit](https://github.com/ewynx/shelter_in_place/commit/53ca9c64c536a774cb80555dbeaf4d3205193c59#diff-a8fd228a78c5396c428a5dd4d4c0b8d0L14) for a commented-out example of how this was implemented.

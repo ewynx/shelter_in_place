@@ -8,15 +8,15 @@ class Day {
   Set<String> activities;
   String note;
 
-  Day({this.id, this.date, this.socialDistance, this.feelings,this.activities,this.note});
+  Day({this.id, this.date, this.socialDistance, this.feelings, this.activities, this.note});
 
-  Day.fromMap(Map snapshot,String id) :
-        id = id ?? '',
-        date = snapshot['date'] ?? '', //TODO check how to put it in the correct timezone
-        socialDistance = snapshot['socialDistance'] ?? '',
-        feelings = snapshot['feelings'] ?? new HashSet(),
-        activities = snapshot['activities'] ?? new HashSet(),
-        note = snapshot['note'] ?? '';
+  Day.fromMap(Map snapshot, String id):
+    id = snapshot['id'] ?? '',
+    date = DateTime.parse(snapshot['date']) ?? '', //TODO check how to put it in the correct timezone
+    socialDistance = snapshot['socialDistance'] ?? '',
+    feelings = Set<String>.from(snapshot['feelings']) ?? new HashSet(),
+    activities = Set<String>.from(snapshot['activities']) ?? new HashSet(),
+    note = snapshot['note'] ?? '';
 
   List<String> getActivities() {
     return this.activities.toList();
@@ -26,15 +26,13 @@ class Day {
     return this.feelings.toList();
   }
 
-  toJson() {
-    return {
-      "date": date.toUtc(),
-      "socialDistance": socialDistance,
-      "feelings": feelings,
-      "activities": activities,
-      "note": note
+  Map<String, dynamic> toJson() =>
+    {
+      'id': this.id,
+      'date': this.date.toString(),
+      'socialDistance': this.socialDistance,
+      'feelings': this.feelings.toList(),
+      'activities': this.activities.toList(),
+      'note': this.note
     };
-  }
-
-
 }

@@ -39,24 +39,20 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _refreshContent() async {
-    var now = DateTime.now();
-    var dateAnsweredString = now.toIso8601String();
     try {
       final prefs = await SharedPreferences.getInstance();
-      dateAnsweredString =
-          prefs.getString(SharedPreferencesKeys.DATE_ANSWERED) ??
-              now.toIso8601String();
+      if (prefs.containsKey(SharedPreferencesKeys.DATE_ANSWERED)) {
+        String dateAnsweredString = prefs.getString(SharedPreferencesKeys.DATE_ANSWERED);
+        var nowString = DateTime.now().toIso8601String();
+        DateTime dateAnswered = DateTime.parse(dateAnsweredString);
+        DateTime today = DateTime.parse(nowString);
+        if (dateAnswered.year == today.year && dateAnswered.month == today.month && dateAnswered.day == today.day) {
+          Navigator.pushNamed(context, 'summary');
+        }
+      }
     } catch (error) {
       debugPrint(
           "Something went wrong getting lastTimeFilledOut from local storage");
-    }
-
-    var dateAnswered = DateTime.parse(dateAnsweredString);
-
-    // App has not been opened today, so we navigate to the questionnaire
-    if (new DateTime(now.year, now.month, now.day) !=
-        new DateTime(dateAnswered.year, dateAnswered.month, dateAnswered.day)) {
-      Navigator.pushNamed(context, 'first-question');
     }
   }
 

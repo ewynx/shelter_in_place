@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:shelter_in_place/pages/settings/settings_overview.dart';
-import 'package:shelter_in_place/pages/summary/new_summary.dart';
+import 'package:shelter_in_place/pages/summary/days_tracker.dart';
 import 'package:shelter_in_place/pages/util/colors.dart';
 
-import 'overview_charts.dart';
+import 'summary/mood_tracker.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key}) : super(key: key);

@@ -80,7 +80,7 @@
   "Tired": "Tired",
   "meditate": "Meditate",
   "meditate-short": "Meditate",
-  "My log for": "My log for ",
+  "Log for": "Log for ",
   "jan": "January",
   "feb": "February",
   "mar": "March",
@@ -93,5 +93,7 @@
   "oct": "October",
   "nov": "November",
   "dec": "December",
-  "Your last 7 entries": "Your last 7 entries"
+  "Your last 7 entries": "Your last 7 entries",
+  "Days tracker": "Days tracker",
+  "Mood tracker": "Mood tracker"
 }

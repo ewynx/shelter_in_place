@@ -9,7 +9,7 @@ import 'package:shelter_in_place/pages/questions/shared_const.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shelter_in_place/pages/util/my_legend.dart';
 import 'package:shelter_in_place/services/backend_service.dart';
-import '../auth.dart';
+import '../../auth.dart';
 
 import 'my_overview_chart.dart';
 
@@ -30,7 +30,17 @@ class _MyOverviewChartState extends State<MyOverviewChart> {
         child: Column(
           children: <Widget>[
             Padding(
-                padding: const EdgeInsets.fromLTRB(40, 50, 40, 20),
+                padding: const EdgeInsets.fromLTRB(40, 50, 40, 10),
+                child:
+                    Text(AppLocalizations.of(context).translate('Mood tracker'),
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 35.0,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ))),
+            Padding(
+                padding: const EdgeInsets.fromLTRB(40, 0, 40, 20),
                 child: Text(
                     AppLocalizations.of(context)
                         .translate('Your last 7 entries'),

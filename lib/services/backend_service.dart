@@ -57,4 +57,24 @@ class BackendService {
     String daysString = jsonEncode(daysMap);
     return file.writeAsString('$daysString');
   }
+
+  Future<bool> hasAnsweredToday() async {
+    bool fileExists = await databaseFileExists();
+    if (fileExists) {
+      DateTime today = DateTime.now();
+      String todayFormattedAsId = today.month.toString() + today.day.toString() + today.year.toString() + today.millisecond.toString();
+      final daysString = await getDatabaseFileContents();
+      Map<String, dynamic> daysMap = jsonDecode(daysString);
+      daysMap.forEach((mapKey, value) {
+        Day day = new Day.fromMap(daysMap[mapKey], mapKey);
+        if (day.id == todayFormattedAsId) {
+          return true;
+        }
+      });
+      return false;
+    }
+    else {
+      return false;
+    }
+  }
 }

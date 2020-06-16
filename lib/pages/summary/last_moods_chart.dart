@@ -5,21 +5,23 @@ import 'package:shelter_in_place/pages/questions/shared_const.dart';
 import 'package:shelter_in_place/pages/util/my_graph.dart';
 import "package:collection/collection.dart";
 
-class OverviewChart extends StatelessWidget {
-  OverviewChart({@required this.days});
+class LastMoodsChart extends StatelessWidget {
+  LastMoodsChart({@required this.days});
 
   final List<Day> days;
 
   @override
   Widget build(BuildContext context) {
-    List<List<charts.Series<OrdinalFeeling, String>>> dataAllDays = days.map((day) => getDataForDay(day)).toList();
+    List<List<charts.Series<OrdinalFeeling, String>>> dataAllDays =
+        days.reversed.map((day) => getDataForDay(day)).toList();
     return ListView.builder(
         itemCount: dataAllDays.length,
         itemBuilder: (BuildContext buildContext, int index) {
-          return StackedHorizontalBarChart(dataAllDays[index],
+          return StackedHorizontalBarChart(
+              dataAllDays[index],
+              days.reversed.toList()[index],
               animate: true);
-        }
-    );
+        });
   }
 }
 
@@ -43,7 +45,9 @@ charts.Series<OrdinalFeeling, String> getSeries(
 
 // The day is transformed into a list of data containing the feelings for this day
 List<charts.Series<OrdinalFeeling, String>> getDataForDay(Day day) {
-  List<OrdinalFeeling> data = day.feelings.map((feeling) => new OrdinalFeeling(feeling, day.date)).toList();
+  List<OrdinalFeeling> data = day.feelings
+      .map((feeling) => new OrdinalFeeling(feeling, day.date))
+      .toList();
   List<charts.Series<OrdinalFeeling, String>> series = [];
   for (var feeling in Constants.feelings) {
     series.add(getSeries(data, feeling));

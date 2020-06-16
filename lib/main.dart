@@ -64,7 +64,7 @@ class MyApp extends StatelessWidget {
                   return snapshot.hasData ? SocialDistancing() : LoginFirstPage();
                 } else {
                   // show loading indicator
-                  JumpingDotsProgressIndicator(fontSize: 100.0, color: Colors.blue);
+                  return JumpingDotsProgressIndicator(fontSize: 100.0, color: Colors.blue);
                 }
               },
             ),

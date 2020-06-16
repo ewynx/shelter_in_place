@@ -60,6 +60,7 @@ class BackendService {
 
   Future<bool> hasAnsweredToday() async {
     bool fileExists = await databaseFileExists();
+    bool hasAnsweredToday = false;
     if (fileExists) {
       DateTime today = DateTime.now();
       String todayFormattedAsId = today.month.toString() + today.day.toString() + today.year.toString() + today.millisecond.toString();
@@ -68,13 +69,13 @@ class BackendService {
       daysMap.forEach((mapKey, value) {
         Day day = new Day.fromMap(daysMap[mapKey], mapKey);
         if (day.id == todayFormattedAsId) {
-          return true;
+          hasAnsweredToday = true;
         }
       });
-      return false;
+      return hasAnsweredToday;
     }
     else {
-      return false;
+      return hasAnsweredToday;
     }
   }
 }

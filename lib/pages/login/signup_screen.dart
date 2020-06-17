@@ -34,7 +34,7 @@ class _SignupPageState extends State<SignupPage> {
                   image: AssetImage('wordmark3.png'),
                   width: 200,
                 ),
-                Container(
+                SingleChildScrollView(
                     padding: EdgeInsets.all(20.0),
                     child: Form(
                         key: _formKey,

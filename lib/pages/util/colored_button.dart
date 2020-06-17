@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:shelter_in_place/pages/localization/localizations.dart';
 
 class MyColoredButton extends StatelessWidget {
-  MyColoredButton({@required this.buttonColor, @required this.borderColor, @required this.titleKeyName, @required this.onPressed});
+  MyColoredButton({@required this.buttonColor, @required this.borderColor, @required this.titleKeyName, @required this.onPressed, this.textColor});
 
   final GestureTapCallback onPressed;
   final String titleKeyName;
   final Color buttonColor;
   final Color borderColor;
+  final Color textColor;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +25,7 @@ class MyColoredButton extends StatelessWidget {
         ),
 
         color: buttonColor,
-        textColor: Colors.white,
+        textColor: textColor == null ? Colors.white : textColor,
         child: Center(
           child: Padding(
               padding: const EdgeInsets.fromLTRB(10, 20, 10, 20),

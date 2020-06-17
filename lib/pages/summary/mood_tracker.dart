@@ -1,15 +1,10 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:progress_indicators/progress_indicators.dart';
-import 'package:provider/provider.dart';
 import 'package:shelter_in_place/models/day_model.dart';
 import 'package:shelter_in_place/pages/localization/localizations.dart';
 import 'package:shelter_in_place/pages/questions/shared_const.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shelter_in_place/pages/util/my_legend.dart';
 import 'package:shelter_in_place/services/backend_service.dart';
-import '../../auth.dart';
 
 import 'last_moods_chart.dart';
 

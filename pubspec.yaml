@@ -1,5 +1,5 @@
 name: shelter_in_place
-description: A new Flutter project.
+description: A mental health app during social distancing.
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -35,6 +35,7 @@ dependencies:
   smooth_page_indicator: ^0.1.5
   path_provider: ^1.3.0
   progress_indicators: ^0.1.5
+  flutter_email_sender:
 
 dev_dependencies:
   flutter_test:

@@ -15,7 +15,8 @@ class SingleDaySummary extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<IconLegendElement> activities = day.getActivities().map((String keyName) {
+    List<IconLegendElement> activities =
+        day.getActivities().map((String keyName) {
       return IconLegendElement(
         keyName: Constants().shortActivities()[keyName],
         // Display a shorter activity name
@@ -50,9 +51,15 @@ class SingleDaySummary extends StatelessWidget {
           children: <Widget>[
             Divider(),
             subTitle(context, 'My activities'),
-            ConstrainedBox(
-                constraints: BoxConstraints.expand(height: 60.0),
-                child: getGridActivities(activities)),
+            Container(
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                height: 50,
+                child: ListView.builder(
+                    itemCount: activities.length,
+                    itemBuilder: (BuildContext buildContext, int index) {
+                      return activities[index];
+                    },
+                    scrollDirection: Axis.horizontal)),
             subTitle(context, 'My mood'),
             ConstrainedBox(
                 constraints: BoxConstraints.expand(height: 70.0),
@@ -88,14 +95,6 @@ GridView getGrid(List<StatelessWidget> items) {
       children: items);
 }
 
-GridView getGridActivities(List<IconLegendElement> items) {
-  return GridView.count(
-    // Create a grid with 4 columns
-      crossAxisCount: 4,
-      padding: const EdgeInsets.all(10.0),
-      children: items);
-}
-
 Icon getMoodIcon(Day day) {
   int points = day.feelings.map((feeling) {
     return MoodConstants().pointPerFeeling()[feeling];
@@ -105,19 +104,19 @@ Icon getMoodIcon(Day day) {
   Color color;
   if (points == 0) {
     data = Icons.sentiment_neutral;
-    color = teal;
+    color = powderBlue;
   } else if (points < 0 && points > -4) {
     data = Icons.sentiment_dissatisfied;
-    color = purple;
+    color = indigo3;
   } else if (points < 0) {
     data = Icons.sentiment_very_dissatisfied;
     color = indigo1;
   } else if (points > 0 && points < 4) {
     data = Icons.sentiment_satisfied;
-    color = yellow1;
+    color = yellow3;
   } else {
     data = Icons.sentiment_very_satisfied;
-    color = orange;
+    color = yellow1;
   }
 
   return Icon(data, size: 36.0, color: color);

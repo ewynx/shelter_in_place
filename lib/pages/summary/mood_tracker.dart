@@ -63,7 +63,7 @@ class _MyOverviewChartState extends State<MyOverviewChart> {
                           return ErrorWidget(snapshot.toString());
                         }
                         // Take the last 7 entries if possible
-                        List<Day> days = snapshot.data.take(7).toList() ?? [];
+                        List<Day> days = snapshot.data.reversed.take(7).toList() ?? [];
                         return LastMoodsChart(days: days);
                       } else {
                         return JumpingDotsProgressIndicator(

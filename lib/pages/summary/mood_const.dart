@@ -1,6 +1,5 @@
 import 'dart:collection';
 
-import 'package:flutter/material.dart';
 import 'package:shelter_in_place/pages/questions/shared_const.dart';
 
 class MoodConstants {
@@ -8,18 +7,17 @@ class MoodConstants {
 
   HashMap<String, int> pointPerFeeling() {
     HashMap pointPerFeeling = new HashMap<String, int>();
-    pointPerFeeling.putIfAbsent(feelings[0], () => 2);
-    pointPerFeeling.putIfAbsent(feelings[1], () => -2);
-    pointPerFeeling.putIfAbsent(feelings[2], () => -2);
-    pointPerFeeling.putIfAbsent(feelings[3], () => 2);
-    pointPerFeeling.putIfAbsent(feelings[4], () => 1);
-    pointPerFeeling.putIfAbsent(feelings[5], () => 2);
-    pointPerFeeling.putIfAbsent(feelings[6], () => -1);
-    pointPerFeeling.putIfAbsent(feelings[7], () => 1);
-    pointPerFeeling.putIfAbsent(feelings[8], () => -2);
-    pointPerFeeling.putIfAbsent(feelings[9], () => -2);
-    pointPerFeeling.putIfAbsent(feelings[10], () => 1);
-    pointPerFeeling.putIfAbsent(feelings[11], () => 0);
+    pointPerFeeling.putIfAbsent("Relaxed", () => 1);
+    pointPerFeeling.putIfAbsent("Happy", () => 2);
+    pointPerFeeling.putIfAbsent("Inspired", () => 2);
+    pointPerFeeling.putIfAbsent("Content", () => 1);
+    pointPerFeeling.putIfAbsent("Energetic", () => 2);
+
+    pointPerFeeling.putIfAbsent("Anxious", () => -2);
+    pointPerFeeling.putIfAbsent("Sad/Depressed", () => -2);
+    pointPerFeeling.putIfAbsent("Angry", () => -2);
+    pointPerFeeling.putIfAbsent("Scared", () => -2);
+    pointPerFeeling.putIfAbsent("Tired", () => -2);
     return pointPerFeeling;
   }
 }

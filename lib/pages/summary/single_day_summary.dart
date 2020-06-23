@@ -5,6 +5,7 @@ import 'package:shelter_in_place/pages/localization/localizations.dart';
 import 'package:shelter_in_place/pages/questions/shared_const.dart';
 import 'package:shelter_in_place/pages/summary/mood_const.dart';
 import 'package:shelter_in_place/pages/util/colors.dart';
+import 'package:shelter_in_place/pages/util/my_icon_legend_item.dart';
 import 'package:shelter_in_place/pages/util/my_legend_item.dart';
 
 class SingleDaySummary extends StatelessWidget {
@@ -14,12 +15,13 @@ class SingleDaySummary extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<LegendElement> activities = day.getActivities().map((String keyName) {
-      return LegendElement(
+    List<IconLegendElement> activities =
+        day.getActivities().map((String keyName) {
+      return IconLegendElement(
         keyName: Constants().shortActivities()[keyName],
         // Display a shorter activity name
         fontsize: 9.0,
-        colors: Constants().colorsActivitities(),
+        iconData: Constants().iconActivitities()[keyName],
       );
     }).toList();
 
@@ -49,9 +51,15 @@ class SingleDaySummary extends StatelessWidget {
           children: <Widget>[
             Divider(),
             subTitle(context, 'My activities'),
-            ConstrainedBox(
-                constraints: BoxConstraints.expand(height: 80.0),
-                child: getGrid(activities)),
+            Container(
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                height: 50,
+                child: ListView.builder(
+                    itemCount: activities.length,
+                    itemBuilder: (BuildContext buildContext, int index) {
+                      return activities[index];
+                    },
+                    scrollDirection: Axis.horizontal)),
             subTitle(context, 'My mood'),
             ConstrainedBox(
                 constraints: BoxConstraints.expand(height: 70.0),
@@ -76,7 +84,7 @@ class SingleDaySummary extends StatelessWidget {
   }
 }
 
-GridView getGrid(List<LegendElement> items) {
+GridView getGrid(List<StatelessWidget> items) {
   return GridView.count(
       // Create a grid with 2 columns
       crossAxisCount: 2,
@@ -84,7 +92,6 @@ GridView getGrid(List<LegendElement> items) {
       padding: const EdgeInsets.all(1.0),
       mainAxisSpacing: 4.0,
       crossAxisSpacing: 4.0,
-      // Generate 100 widgets that display their index in the List.
       children: items);
 }
 
@@ -97,19 +104,19 @@ Icon getMoodIcon(Day day) {
   Color color;
   if (points == 0) {
     data = Icons.sentiment_neutral;
-    color = darkSlateBlue;
+    color = powderBlue;
   } else if (points < 0 && points > -4) {
     data = Icons.sentiment_dissatisfied;
-    color = outerCircleOrange;
+    color = indigo3;
   } else if (points < 0) {
     data = Icons.sentiment_very_dissatisfied;
-    color = circleOrange;
+    color = indigo1;
   } else if (points > 0 && points < 4) {
     data = Icons.sentiment_satisfied;
-    color = powderBlue;
+    color = yellow3;
   } else {
     data = Icons.sentiment_very_satisfied;
-    color = red;
+    color = yellow1;
   }
 
   return Icon(data, size: 36.0, color: color);

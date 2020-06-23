@@ -35,6 +35,7 @@ class _NoteForDayState extends State<NoteForDay> {
                   child: Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: TextField(
+                          minLines: 10, maxLines: 15,
                         decoration: InputDecoration(
                             border: InputBorder.none,
                             hintText: AppLocalizations.of(context)

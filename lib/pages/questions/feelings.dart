@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shelter_in_place/pages/localization/localizations.dart';
 import 'package:shelter_in_place/pages/questions/shared_const.dart';
+import 'package:shelter_in_place/pages/util/feeling_checkbox.dart';
 import 'package:shelter_in_place/pages/util/round_checkbox.dart';
 import 'package:shelter_in_place/models/day_model.dart';
 
@@ -33,8 +34,8 @@ class _FeelingsState extends State<Feelings> {
         // Generate 100 widgets that display their index in the List.
         children: feelings.map((String keyName) {
           return GridTile(
-              child: LabeledCheckbox(
-            label: AppLocalizations.of(context).translate(keyName),
+              child: FeelingCheckbox(
+            keyName: keyName,
             padding: const EdgeInsets.symmetric(horizontal: 10.0),
             value: answers[keyName],
             onChanged: (bool newValue) {

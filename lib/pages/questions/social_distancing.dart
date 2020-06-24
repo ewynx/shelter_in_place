@@ -47,22 +47,24 @@ class _SocialDistancingState extends State<SocialDistancing> {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
-                    FlatButton(
-                      textColor: Colors.blueAccent,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: new BorderRadius.circular(18.0),
-                      ),
-                      color: Colors.transparent,
-                      child:
-                          Text(AppLocalizations.of(context).translate('Skip'),
+                    Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: FlatButton(
+                          textColor: Colors.blueAccent,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: new BorderRadius.circular(18.0),
+                          ),
+                          color: Colors.transparent,
+                          child: Text(
+                              AppLocalizations.of(context).translate('Skip'),
                               style: TextStyle(
                                 fontSize: 15.0,
                                 fontWeight: FontWeight.bold,
                               )),
-                      onPressed: () {
-                        Navigator.pushNamed(context, 'summary');
-                      },
-                    )
+                          onPressed: () {
+                            Navigator.pushNamed(context, 'summary');
+                          },
+                        ))
                   ],
                 ))
               ],

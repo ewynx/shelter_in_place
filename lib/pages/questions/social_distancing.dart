@@ -42,6 +42,29 @@ class _SocialDistancingState extends State<SocialDistancing> {
                   SizedBox(height: 20.0),
                   noButton(context, 'no', dayModel)
                 ]),
+                Expanded(
+                    child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget>[
+                    FlatButton(
+                      textColor: Colors.blueAccent,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: new BorderRadius.circular(18.0),
+                      ),
+                      color: Colors.transparent,
+                      child:
+                          Text(AppLocalizations.of(context).translate('Skip'),
+                              style: TextStyle(
+                                fontSize: 15.0,
+                                fontWeight: FontWeight.bold,
+                              )),
+                      onPressed: () {
+                        Navigator.pushNamed(context, 'summary');
+                      },
+                    )
+                  ],
+                ))
               ],
             ),
           ),
@@ -70,6 +93,7 @@ SizedBox yesButton(BuildContext context, String keyname, Day dayModel) {
         },
       ));
 }
+
 SizedBox noButton(BuildContext context, String keyname, Day dayModel) {
   return new SizedBox(
       width: 300.0,

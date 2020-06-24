@@ -3,13 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:shelter_in_place/pages/home.dart';
-import 'package:shelter_in_place/pages/summary/mood_tracker.dart';
-import 'package:shelter_in_place/pages/questions/note.dart';
 import 'package:shelter_in_place/pages/questions/questions_controller.dart';
 import 'package:shelter_in_place/pages/questions/social_distancing.dart';
-import 'package:shelter_in_place/pages/settings/notification_settings.dart';
+import 'package:shelter_in_place/pages/settings/appreciate-feedback.dart';
+import 'package:shelter_in_place/pages/settings/user-feedback.dart';
 import 'package:shelter_in_place/pages/settings/user_settings.dart';
-import 'package:shelter_in_place/pages/summary/days_tracker.dart';
 import 'package:shelter_in_place/services/backend_service.dart';
 import 'package:shelter_in_place/services/days_service.dart';
 
@@ -19,8 +17,6 @@ import 'pages/localization/localizations.dart';
 import 'pages/login/login_screen_1.dart';
 import 'pages/login/login_screen_2.dart';
 import 'pages/login/signup_screen.dart';
-import 'pages/questions/activities.dart';
-import 'pages/questions/feelings.dart';
 
 void main() => runApp(
       ChangeNotifierProvider<AuthService>(
@@ -98,9 +94,13 @@ class MyApp extends StatelessWidget {
                 return MaterialPageRoute(
                   builder: (context) => UserSettings(),
                 );
-              } else if (routeSettings.name == 'notification-settings') {
+              } else if (routeSettings.name == 'feedback-page') {
                 return MaterialPageRoute(
-                  builder: (context) => NotificationSettings(),
+                  builder: (context) => UserFeedbackWidget(),
+                );
+              } else if (routeSettings.name == 'appreciate-feedback') {
+                return MaterialPageRoute(
+                  builder: (context) => AppreciateFeedbackWidget(),
                 );
               }
               return null;

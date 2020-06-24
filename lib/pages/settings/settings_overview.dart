@@ -29,9 +29,9 @@ class SettingsOverview extends StatelessWidget {
                 child: Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: WhiteForwardButton(
-                      titleKeyName: 'Notification settings',
+                      titleKeyName: 'Suggestions',
                       onPressed: () {
-                        Navigator.pushNamed(context, 'notification-settings');
+                        Navigator.pushNamed(context, 'feedback-page');
                       },
                     )))
           ]),

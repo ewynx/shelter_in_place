@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:shelter_in_place/models/day_model.dart';
 import 'package:shelter_in_place/pages/questions/shared_const.dart';
 import 'package:shelter_in_place/pages/util/my_graph.dart';
-import "package:collection/collection.dart";
 
 class LastMoodsChart extends StatelessWidget {
   LastMoodsChart({@required this.days});

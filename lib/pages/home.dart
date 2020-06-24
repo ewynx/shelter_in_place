@@ -6,6 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shelter_in_place/pages/util/pref_keys.dart';
 
 import 'lifecycle_event_handler.dart';
+import 'lifecycle_event_handler.dart';
 import 'summary/mood_tracker.dart';
 
 class HomePage extends StatefulWidget {

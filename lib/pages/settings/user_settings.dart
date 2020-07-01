@@ -6,6 +6,7 @@ import 'package:shelter_in_place/pages/util/blue_button.dart';
 import 'package:shelter_in_place/pages/util/colors.dart';
 import 'package:shelter_in_place/services/backend_service.dart';
 import 'package:shelter_in_place/pages/util/colors.dart';
+import '../../auth.dart';
 
 import '../localization/localizations.dart';
 

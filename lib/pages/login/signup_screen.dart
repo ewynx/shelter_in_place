@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shelter_in_place/pages/util/light_blue_button.dart';
+import 'package:shelter_in_place/services/backend_service.dart';
 import '../../auth.dart';
 import '../localization/localizations.dart';
 import 'package:shelter_in_place/pages/util/colors.dart';
@@ -22,6 +25,8 @@ class _SignupPageState extends State<SignupPage> {
 
   @override
   Widget build(BuildContext context) {
+    final backendService = Provider.of<BackendService>(context);
+
     return Scaffold(
         resizeToAvoidBottomInset: false,
         body: Container(
@@ -94,7 +99,9 @@ class _SignupPageState extends State<SignupPage> {
                           SizedBox(height: 80.0),
                           LightBlueButton(
                             titleKeyName: 'Sign up',
-                            onPressed: validateSignUpSubmission,
+                            onPressed: () {
+                              validateSignUpSubmission(backendService);
+                            },
                           ),
                           SizedBox(height: 20.0),
                           ButtonTheme(
@@ -129,7 +136,7 @@ class _SignupPageState extends State<SignupPage> {
         hintText: AppLocalizations.of(context).translate(keyName));
   }
 
-  void validateSignUpSubmission() async {
+  void validateSignUpSubmission(BackendService backendService) async {
     // save the input fields
     final form = _formKey.currentState;
     form.save();
@@ -139,8 +146,11 @@ class _SignupPageState extends State<SignupPage> {
         FirebaseUser result = await Provider.of<AuthService>(context)
             .createUser(email: _email, password: _password);
         print(result);
-        // Jump into the questionnaire
-        Navigator.pushNamed(context, 'first-question');
+        // Save the name of the user locally
+        backendService.addName(_name).then((String name) {
+          // Then jump into the questionnaire
+          Navigator.pushNamed(context, 'first-question');
+        });
       } on AuthException catch (error) {
         // handle the firebase specific error
         return _buildErrorDialog(context, error.message);
@@ -149,8 +159,6 @@ class _SignupPageState extends State<SignupPage> {
         return _buildErrorDialog(context, error.toString());
       }
     }
-
-    //TODO how can we save the name locally?
   }
 
   _buildErrorDialog(BuildContext context, _message) {

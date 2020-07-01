@@ -6,12 +6,11 @@ import 'package:shelter_in_place/models/day_model.dart';
 import 'package:path_provider/path_provider.dart';
 
 class BackendService {
-
   final databaseFilename = 'distince-day-entries.json';
 
   Future<String> getDatabasePath() async {
     final directory = await getApplicationDocumentsDirectory();
-    return(directory.path);
+    return (directory.path);
   }
 
   Future<File> getDatabaseFile() async {
@@ -21,7 +20,7 @@ class BackendService {
 
   Future<String> getDatabaseFileContents() async {
     final file = await getDatabaseFile();
-    return(await file.readAsString());
+    return (await file.readAsString());
   }
 
   Future<bool> databaseFileExists() async {
@@ -41,7 +40,8 @@ class BackendService {
   }
 
   Future<File> addDay(Day day) async {
-    print("Adding the following day to the database file: " + day.toJson().toString());
+    print("Adding the following day to the database file: " +
+        day.toJson().toString());
     Map<String, dynamic> daysMap = Map();
     final file = await getDatabaseFile();
     bool fileExists = await databaseFileExists();
@@ -56,5 +56,15 @@ class BackendService {
     // Convert the full json to a string, and write that string to the database file
     String daysString = jsonEncode(daysMap);
     return file.writeAsString('$daysString');
+  }
+
+  Future<String> addName(String name) async {
+    print("Adding name of user to database: " + name);
+//TODO
+  }
+
+  Future<String> getName() async {
+    print("Retrieving name of user from database. ");
+//TODO
   }
 }

@@ -12,7 +12,7 @@ class UserFeedbackWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       key: globalKey,
-      appBar: AppBar(backgroundColor: darkSlateBlue),
+      appBar: AppBar(backgroundColor: darkSlateBlue, title: Text(AppLocalizations.of(context).translate('Suggestions'))),
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[

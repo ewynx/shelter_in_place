@@ -24,6 +24,7 @@ Color yellow4 = Colors.yellow[300];
 Color yellow5 = Colors.amber[100];
 
 Color green = Colors.lightGreenAccent[200];
+Color success = Colors.greenAccent[700];
 
 Color backgroundGrey = Colors.grey[200];
 Color buttonBlue = Colors.blue[600];

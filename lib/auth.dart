@@ -60,5 +60,4 @@ class AuthService with ChangeNotifier {
     final result = this.currentUser.updatePassword(password);
     print("Updated the user's password: " + result.toString());
   }
-
 }

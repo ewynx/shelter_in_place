@@ -20,7 +20,6 @@ class _UserSettingsState extends State<UserSettings> {
 
   // Form with validation
   final _formKey = GlobalKey<FormState>();
-  String _currentPassword;
   String _newPassword;
   String _email;
   String _name;

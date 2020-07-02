@@ -49,13 +49,14 @@ class AuthService with ChangeNotifier {
       throw new AuthException(e.code, e.message);
     }
   }
-}
 
-void updateEmail(String email) async {
-  final result = this.currentUser.updateEmail(email);
-  this.currentUserEmail = email;
-}
+  void updateEmail(String email) async {
+    final result = this.currentUser.updateEmail(email);
+    this.currentUserEmail = email;
+  }
 
-void updatePassword(String password) async {
-  final result = this.currentUser.updatePassword(password);
+  void updatePassword(String password) async {
+    final result = this.currentUser.updatePassword(password);
+  }
+
 }

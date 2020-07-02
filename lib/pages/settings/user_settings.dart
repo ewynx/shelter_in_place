@@ -135,7 +135,7 @@ class _UserSettingsState extends State<UserSettings> {
     );
   }
 
-  void void updateUserInfo(BackendService backendService, AuthService firebaseAuth) async {
+  void updateUserInfo(BackendService backendService, AuthService firebaseAuth) async {
     // save the input fields
     final form = _formKey.currentState;
     form.save();

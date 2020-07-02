@@ -53,10 +53,12 @@ class AuthService with ChangeNotifier {
   void updateEmail(String email) async {
     final result = this.currentUser.updateEmail(email);
     this.currentUserEmail = email;
+    print("Updated the user email address: " + result.toString());
   }
 
   void updatePassword(String password) async {
     final result = this.currentUser.updatePassword(password);
+    print("Updated the user's password: " + result.toString());
   }
 
 }

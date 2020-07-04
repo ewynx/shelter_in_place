@@ -67,8 +67,7 @@ class NewSummary extends StatelessWidget {
                               day: days[days.length - index - 1]);
                         });
                   } else {
-                    return JumpingDotsProgressIndicator(
-                        fontSize: 100.0, color: Colors.blue);
+                    return JumpingDotsProgressIndicator(fontSize: 100.0, color: Colors.blue);
                   }
                 }),
           )

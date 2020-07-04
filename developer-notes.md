@@ -44,10 +44,10 @@ This section of the documentation explains some common styling aspects of the ap
 
 As implemented in this commit, use the following widget on any loading screen:
 
-```
+```dart
 import 'package:progress_indicators/progress_indicators.dart';
 ...
-JumpingDotsProgressIndicator(fontSize: 100.0, color: Colors.blue);
+return JumpingDotsProgressIndicator(fontSize: 100.0, color: Colors.blue);
 ```
 
 See the [pub.dev documentation](https://pub.dev/packages/progress_indicators) for more information about `progress_indicators.dart`.

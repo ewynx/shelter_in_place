@@ -10,6 +10,7 @@ import 'package:shelter_in_place/pages/settings/user-feedback.dart';
 import 'package:shelter_in_place/pages/settings/user_settings.dart';
 import 'package:shelter_in_place/services/backend_service.dart';
 import 'package:shelter_in_place/services/days_service.dart';
+import 'package:progress_indicators/progress_indicators.dart';
 
 import 'auth.dart';
 import 'models/day_model.dart';
@@ -59,7 +60,7 @@ class MyApp extends StatelessWidget {
                   return snapshot.hasData ? SocialDistancing() : LoginFirstPage();
                 } else {
                   // show loading indicator
-                  return Container(color: Colors.white);
+                  return JumpingDotsProgressIndicator(fontSize: 100.0, color: Colors.blue);
                   // return LoadingCircle();
                 }
               },

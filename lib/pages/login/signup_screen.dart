@@ -147,10 +147,9 @@ class _SignupPageState extends State<SignupPage> {
             .createUser(email: _email, password: _password);
         print(result);
         // Save the name of the user locally
-        backendService.addName(_name).then((String name) {
-          // Then jump into the questionnaire
-          Navigator.pushNamed(context, 'first-question');
-        });
+        backendService.updateName(_name);
+        // Then jump into the questionnaire
+        Navigator.pushNamed(context, 'first-question');
       } on AuthException catch (error) {
         // handle the firebase specific error
         return _buildErrorDialog(context, error.message);

@@ -51,7 +51,6 @@ class _UserSettingsState extends State<UserSettings> {
                     child: Column(children: <Widget>[
                       SizedBox(height: 20.0),
                       FutureBuilder<String>(
-                          //TODO test this once name is saved locally
                           future: nameFuture,
                           builder: (context, snapshot) {
                             if (snapshot.connectionState ==
@@ -86,7 +85,7 @@ class _UserSettingsState extends State<UserSettings> {
                                           )),
                                       filled: true,
                                       fillColor: lightGrey,
-                                      hintText: name));
+                                      hintText: "Name"));
                             } else {
                               return JumpingDotsProgressIndicator(
                                   fontSize: 100.0, color: Colors.blue);
@@ -166,20 +165,18 @@ class _UserSettingsState extends State<UserSettings> {
         // TODO 2: if a new password was entered, update on Firebase side
 
         // We save the name only locally and upon completion show a success message
-        backendService.addName(_name).then((String name) {
-          final snackBar = SnackBar(
-              content: Text(
-                AppLocalizations.of(context)
-                    .translate('Your settings have been updated'),
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 18,
-                ),
-                textAlign: TextAlign.center,
+        backendService.updateName(_name);
+        final snackBar = SnackBar(
+            content: Text(
+              AppLocalizations.of(context).translate('Your settings have been updated'),
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 18,
               ),
-              backgroundColor: success);
-          globalKey.currentState.showSnackBar(snackBar);
-        });
+              textAlign: TextAlign.center,
+            ),
+            backgroundColor: success);
+        globalKey.currentState.showSnackBar(snackBar);
       } on AuthException catch (error) {
         // handle the firebase specific error
         return _buildErrorDialog(context, error.message);

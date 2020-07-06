@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:shelter_in_place/pages/home.dart';
@@ -57,7 +58,13 @@ class MyApp extends StatelessWidget {
               future: Provider.of<AuthService>(context).getUser(),
               builder: (context, AsyncSnapshot<FirebaseUser> snapshot) {
                 if (snapshot.connectionState == ConnectionState.done) {
-                  return snapshot.hasData ? SocialDistancing() : LoginFirstPage();
+                  if (snapshot.hasData) {
+                    Provider.of<AuthService>(context).setAuthServiceUserData(snapshot.data);
+                    return SocialDistancing();
+                  }
+                  else {
+                    return LoginFirstPage();
+                  }
                 } else {
                   // show loading indicator
                   return JumpingDotsProgressIndicator(fontSize: 100.0, color: Colors.blue);

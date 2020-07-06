@@ -6,6 +6,7 @@ import 'package:shelter_in_place/pages/util/blue_button.dart';
 import 'package:shelter_in_place/pages/util/colors.dart';
 import 'package:shelter_in_place/services/backend_service.dart';
 import 'package:shelter_in_place/pages/util/colors.dart';
+import '../../auth.dart';
 
 import '../localization/localizations.dart';
 
@@ -19,7 +20,6 @@ class _UserSettingsState extends State<UserSettings> {
 
   // Form with validation
   final _formKey = GlobalKey<FormState>();
-  String _currentPassword;
   String _newPassword;
   String _email;
   String _name;
@@ -27,6 +27,7 @@ class _UserSettingsState extends State<UserSettings> {
   @override
   Widget build(BuildContext context) {
     final backendService = Provider.of<BackendService>(context);
+    final firebaseAuth = Provider.of<AuthService>(context);
     // Get current name of user
     final nameFuture = backendService.getName();
 
@@ -100,6 +101,7 @@ class _UserSettingsState extends State<UserSettings> {
                               decorationColor: Colors.white),
                           onSaved: (value) => _email = value.trim(),
                           keyboardType: TextInputType.emailAddress,
+                          initialValue: firebaseAuth.currentUserEmail,
                           validator: (value) {
                             if (value.isEmpty) {
                               return AppLocalizations.of(context)
@@ -113,37 +115,15 @@ class _UserSettingsState extends State<UserSettings> {
                       TextFormField(
                           cursorColor: darkSlateBlue,
                           style: TextStyle(color: darkSlateBlue, fontSize: 18),
-                          onSaved: (value) => _currentPassword = value.trim(),
-                          obscureText: true,
-                          validator: (value) {
-                            if (value.isEmpty) {
-                              return AppLocalizations.of(context)
-                                  .translate('Current password');
-                            }
-                            return null;
-                          },
-                          decoration: LightGreyInputDecoration(
-                              context, 'Current password')),
-                      SizedBox(height: 20.0),
-                      TextFormField(
-                          cursorColor: darkSlateBlue,
-                          style: TextStyle(color: darkSlateBlue, fontSize: 18),
                           onSaved: (value) => _newPassword = value.trim(),
                           obscureText: true,
-                          validator: (value) {
-                            if (value.isEmpty) {
-                              return AppLocalizations.of(context)
-                                  .translate('New password');
-                            }
-                            return null;
-                          },
                           decoration: LightGreyInputDecoration(
                               context, 'New password')),
                       SizedBox(height: 30.0),
                       BlueButton(
                         titleKeyName: 'Update settings',
                         onPressed: () {
-                          validateSignUpSubmission(backendService);
+                          updateUserInfo(backendService, firebaseAuth);
                         },
                       )
                     ])))
@@ -153,17 +133,20 @@ class _UserSettingsState extends State<UserSettings> {
     );
   }
 
-  void validateSignUpSubmission(BackendService backendService) async {
+  void updateUserInfo(BackendService backendService, AuthService firebaseAuth) async {
     // save the input fields
     final form = _formKey.currentState;
     form.save();
 
     if (form.validate()) {
       try {
-        // TODO 1: Firebase verification someone should only be able to make changes if they have the correct username/password combo
-
-        // TODO 2: if a new password was entered, update on Firebase side
-
+        if (_email != firebaseAuth.currentUserEmail) {
+          firebaseAuth.updateEmail(_email);
+        }
+        if (_newPassword.isNotEmpty) {
+          firebaseAuth.updatePassword(_newPassword);
+        }
+        
         // We save the name only locally and upon completion show a success message
         backendService.updateName(_name);
         final snackBar = SnackBar(

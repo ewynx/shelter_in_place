@@ -15,8 +15,9 @@ class SingleDaySummary extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Widget myActivitiesContainer = SizedBox(height: 10.0);
     List<IconLegendElement> activities =
-        day.getActivities().map((String keyName) {
+    day.getActivities().map((String keyName) {
       return IconLegendElement(
         keyName: Constants().shortActivities()[keyName],
         // Display a shorter activity name
@@ -24,6 +25,17 @@ class SingleDaySummary extends StatelessWidget {
         iconData: Constants().iconActivitities()[keyName],
       );
     }).toList();
+    if (activities.isNotEmpty) {
+      myActivitiesContainer = Container(
+          padding: const EdgeInsets.symmetric(horizontal: 15),
+          height: 50,
+          child: ListView.builder(
+              itemCount: activities.length,
+              itemBuilder: (BuildContext buildContext, int index) {
+                return activities[index];
+              },
+              scrollDirection: Axis.horizontal));
+    }
 
     List<LegendElement> mood = day.getFeelings().map((String keyName) {
       return LegendElement(
@@ -36,6 +48,12 @@ class SingleDaySummary extends StatelessWidget {
     String monthName = DateFormat('MMMM').format(day.date);
     String dayNr = DateFormat('d').format(day.date);
 
+    Widget myMoodContainer = SizedBox(height: 10.0);
+    if (mood.isNotEmpty) {
+      myMoodContainer = ConstrainedBox(
+          constraints: BoxConstraints.expand(height: 70.0),
+          child: getGrid(mood));
+    }
     return Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(18.0),
@@ -51,19 +69,9 @@ class SingleDaySummary extends StatelessWidget {
           children: <Widget>[
             Divider(),
             subTitle(context, 'My activities'),
-            Container(
-                padding: const EdgeInsets.symmetric(horizontal: 15),
-                height: 50,
-                child: ListView.builder(
-                    itemCount: activities.length,
-                    itemBuilder: (BuildContext buildContext, int index) {
-                      return activities[index];
-                    },
-                    scrollDirection: Axis.horizontal)),
+            myActivitiesContainer,
             subTitle(context, 'My mood'),
-            ConstrainedBox(
-                constraints: BoxConstraints.expand(height: 70.0),
-                child: getGrid(mood)),
+            myMoodContainer,
             subTitle(context, 'My notes'),
             Row(children: <Widget>[
               Expanded(
@@ -86,7 +94,7 @@ class SingleDaySummary extends StatelessWidget {
 
 GridView getGrid(List<StatelessWidget> items) {
   return GridView.count(
-      // Create a grid with 2 columns
+    // Create a grid with 2 columns
       crossAxisCount: 2,
       childAspectRatio: 10,
       padding: const EdgeInsets.all(1.0),
@@ -96,9 +104,12 @@ GridView getGrid(List<StatelessWidget> items) {
 }
 
 Icon getMoodIcon(Day day) {
-  int points = day.feelings.map((feeling) {
-    return MoodConstants().pointPerFeeling()[feeling];
-  }).reduce((a, b) => a + b);
+  int points = 0;
+  if (day.feelings.isNotEmpty) {
+    points = day.feelings.map((feeling) {
+      return MoodConstants().pointPerFeeling()[feeling];
+    }).reduce((a, b) => a + b);
+  }
 
   IconData data;
   Color color;

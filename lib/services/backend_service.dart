@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:shelter_in_place/models/day_model.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class BackendService {
   final databaseFilename = 'distince-day-entries.json';
@@ -58,13 +59,17 @@ class BackendService {
     return file.writeAsString('$daysString');
   }
 
-  Future<String> addName(String name) async {
-    print("Adding name of user to database: " + name);
-//TODO
+  Future<SharedPreferences> getSharedPreferences() {
+    return SharedPreferences.getInstance();
+  }
+
+  void updateName(String name) async {
+    final sharedPreferences = await getSharedPreferences();
+    sharedPreferences.setString('userName', name);
   }
 
   Future<String> getName() async {
-    print("Retrieving name of user from database. ");
-//TODO
+    final sharedPreferences = await getSharedPreferences();
+    return sharedPreferences.getString('userName') ?? '';
   }
 }

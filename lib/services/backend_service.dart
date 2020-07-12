@@ -40,6 +40,23 @@ class BackendService {
     return days;
   }
 
+  Future<List<Day>> getDaysFromCurrentMonth() async {
+    DateTime today = DateTime.now();
+    int currentMonth = today.month;
+    int currentYear = today.year;
+    List<Day> days = [];
+    final daysString = await getDatabaseFileContents();
+    Map<String, dynamic> daysMap = jsonDecode(daysString);
+    daysMap.forEach((mapKey, value) {
+      Day newDay = new Day.fromMap(daysMap[mapKey], mapKey);
+      DateTime newDayDate = newDay.date;
+      if (newDayDate.month == currentMonth && newDayDate.year == currentYear) {
+        days.add(newDay);
+      }
+    });
+    return days;
+  }
+
   Future<File> addDay(Day day) async {
     print("Adding the following day to the database file: " +
         day.toJson().toString());

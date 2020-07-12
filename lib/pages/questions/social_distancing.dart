@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:shelter_in_place/models/day_model.dart';
 import 'package:shelter_in_place/pages/localization/localizations.dart';
 import 'package:shelter_in_place/pages/util/colors.dart';
+import 'package:shelter_in_place/services/backend_service.dart';
 
 class SocialDistancing extends StatefulWidget {
   @override
@@ -15,6 +16,8 @@ class _SocialDistancingState extends State<SocialDistancing> {
   Widget build(BuildContext context) {
     final dayModel = Provider.of<Day>(context);
     final String assetName = '-g-distanceGraphic.svg';
+    final backendService = new BackendService();
+    final daysFuture = backendService.getDays();
 
     return SafeArea(
         top: true,
@@ -43,30 +46,50 @@ class _SocialDistancingState extends State<SocialDistancing> {
                   noButton(context, 'no', dayModel)
                 ]),
                 Expanded(
-                    child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: <Widget>[
-                    Padding(
-                        padding: const EdgeInsets.all(5.0),
-                        child: FlatButton(
-                          textColor: Colors.blueAccent,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: new BorderRadius.circular(18.0),
-                          ),
-                          color: Colors.transparent,
-                          child: Text(
-                              AppLocalizations.of(context).translate('Skip'),
-                              style: TextStyle(
-                                fontSize: 15.0,
-                                fontWeight: FontWeight.bold,
-                              )),
-                          onPressed: () {
-                            Navigator.pushNamed(context, 'summary');
-                          },
-                        ))
-                  ],
-                ))
+                    child: FutureBuilder<List<Day>>(
+                        future: daysFuture,
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.done) {
+                            if (snapshot.hasError) {
+                              return Container(width: 0.0, height: 0.0);
+                            }
+                            List<Day> days = snapshot.data ?? [];
+                            if (days.isNotEmpty) {
+                              return Row(
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: <Widget>[
+                                  Padding(
+                                      padding: const EdgeInsets.all(5.0),
+                                      child: FlatButton(
+                                        textColor: Colors.blueAccent,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              new BorderRadius.circular(18.0),
+                                        ),
+                                        color: Colors.transparent,
+                                        child: Text(
+                                            AppLocalizations.of(context)
+                                                .translate('Skip'),
+                                            style: TextStyle(
+                                              fontSize: 15.0,
+                                              fontWeight: FontWeight.bold,
+                                            )),
+                                        onPressed: () {
+                                          Navigator.pushNamed(
+                                              context, 'summary');
+                                        },
+                                      ))
+                                ],
+                              );
+                            } else {
+                              return Container(width: 0.0, height: 0.0);
+                            }
+                          } else {
+                            return Container(width: 0.0, height: 0.0);
+                          }
+                        }))
               ],
             ),
           ),

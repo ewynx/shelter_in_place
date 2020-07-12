@@ -9,8 +9,7 @@ class NewSummary extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final backendService = new BackendService();
-    // TODO Get days for correct month
-    final daysFuture = backendService.getDays();
+    final daysFuture = backendService.getDaysFromCurrentMonth();
 
     List months = [
       'jan',

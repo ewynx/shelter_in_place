@@ -43,6 +43,7 @@ class MyApp extends StatelessWidget {
         child: MaterialApp(
             title: 'distINce',
             theme: ThemeData(fontFamily: 'Gilroy'),
+            debugShowCheckedModeBanner: false,
             localizationsDelegates: [
               AppLocalizations.delegate,
               GlobalMaterialLocalizations.delegate,
